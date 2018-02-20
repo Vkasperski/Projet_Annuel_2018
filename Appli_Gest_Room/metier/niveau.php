@@ -1,10 +1,17 @@
 <?php
 
+
+//idique le niveau d'une reservation 
+
+
 class niveau
 {
 	private $_id_niveau ;
 	private $_libelle_niveau ;
 }
+
+
+// assesseurs
 
 
 public function get_id_niveau()

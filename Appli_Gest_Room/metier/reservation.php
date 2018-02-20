@@ -1,5 +1,9 @@
 <?php
 
+
+// reservation 
+
+
 class reservation 
 {
 
@@ -10,6 +14,10 @@ class reservation
 	private $_fin_reservation ;
 
 }
+
+
+// assesseurs
+
 
 public function get_id_utilisateur()
 {

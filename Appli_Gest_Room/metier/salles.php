@@ -1,11 +1,18 @@
 <?php
 
+
+// salle
+
+
 class salle
 {
 	private $_id_salle ;
 	private $_nom_salle ;
 	private $_disponibilite_salle ;
 }
+
+
+// assesseurs
 
 
 public function get_id_salle()
