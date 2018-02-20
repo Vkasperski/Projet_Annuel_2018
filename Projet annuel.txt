@@ -1,0 +1,47 @@
+Société : acutenz
+lieu : 56 avenue Anatole France, Levallois 92400
+type : PME
+C.A. : ???????????????
+
+
+
+Objectif :
+	- Améliorer la vie social interentrprise
+	- Améliorer l'organisation des salles
+	- Améliorer l'acceuil des clients en formation ou en visite
+
+
+
+
+A Qui ?
+
+
+
+
+
+
+
+Agit sur quoi ?
+
+
+
+
+
+Pourquoi ?
+
+
+
+
+
+
+Exigences Fonctionelles :
+
+
+
+
+
+Exigences non Fonctionelles :
+
+
+
+
