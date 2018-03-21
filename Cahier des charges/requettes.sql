@@ -246,3 +246,13 @@ BEGIN
 	AND disponibilite_salle = true |
 END |
 DELIMITER ;
+
+
+/*Récupération de tous les utilisateurs*/
+DELIMITER |
+DROP PROCEDURE getUsers IF EXISTS
+CREATE PROCEDURE getUsers ()
+BEGIN
+	SELECT * FROM utilisateur |
+END |
+DELIMITER ;

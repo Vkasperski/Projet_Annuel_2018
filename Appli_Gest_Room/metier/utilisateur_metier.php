@@ -4,7 +4,7 @@ class utilisateur_metier
 {
 	function get_utilisateurs()
 	{
-
+		
 	}
 }
 ?>
