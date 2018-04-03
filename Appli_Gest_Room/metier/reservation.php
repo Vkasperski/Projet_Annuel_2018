@@ -13,32 +13,32 @@ class reservation
 	private $_debut_reservation ;
 	private $_fin_reservation ;
 
-}
+
 
 
 // assesseurs
 
 
-public function get_id_utilisateur()
-{
-	return $this->_id_utilisateur ;
-}
-
-public function set_id_utilisateur($id_user)
-{
-	$this->_id_utilisateur = $id_user;
-}
-
-
-public function get_id_salle()
-{
-	return $this->_id_salle ;
-}
-
-public function set_id_salle($id_salle)
-{
-	$this->_id_salle = $id_salle;
-}
+	public function get_id_utilisateur()
+	{
+		return $this->_id_utilisateur ;
+	}
+	
+	public function set_id_utilisateur($id_user)
+	{
+		$this->_id_utilisateur = $id_user;
+	}
+	
+	
+	public function get_id_salle()
+	{
+		return $this->_id_salle ;
+	}
+	
+	public function set_id_salle($id_salle)
+	{
+		$this->_id_salle = $id_salle;
+	}
 
 
 	public function get_id_niveau()
@@ -72,5 +72,7 @@ public function set_id_salle($id_salle)
 	{
 		$this->_fin_reservation = $fin_reservation ;
 	}
+
+}
 
 ?>

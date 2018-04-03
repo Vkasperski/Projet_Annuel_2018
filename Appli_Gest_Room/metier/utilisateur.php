@@ -3,18 +3,32 @@
 //objet utilisateur qui concernera principalement l'utilisateur connecté 
 
 class utilisateur
-{
+{	
+	//attributs
+
 	private $_id_utilisateur ;
 	private $_nom_utilisateur ;
 	private $_prenom_utilisateur ;
 	private $_mail_utilisateur ;
 	private $_identifiant_utilisateur ;
 	private $_mdp_utilisateur ;
+	private $_id_type_utilisateur ;
 
 
+	// Constructeur
+	public function __construct($id, $nom, $prenom, $mail, $identifiant, $mdp, $type)
+	{
+		$this->_id_utilisateur = $id ;
+		$this->_nom_utilisateur = $nom ;
+		$this->_prenom_utilisateur = $prenom ;
+		$this->_mail_utilisateur = $mail ; 
+		$this->_identifiant_utilisateur = $identifiant ;
+		$this->_mdp_utilisateur = $mdp ;
+		$this->_id_type_utilisateur = $type ;
+	}
 
- // assesseurs
 
+ 	// assesseurs
 
 	public function get_id_utilisateur()
 	{
@@ -55,9 +69,9 @@ class utilisateur
 	}
 	
 	
-	public function get_ididentifiant_utilisateur()
+	public function get_identifiant_utilisateur()
 	{
-		return $this->_id_utilisateur ;
+		return $this->_identifiant_utilisateur ;
 	}
 	
 	public function set_ididentifiant_utilisateur($ididentifiant_user)
@@ -74,6 +88,17 @@ class utilisateur
 	public function set_mdp_utilisateur($mdp_user)
 	{
 		$this->_mdp_utilisateur = $mdp_user ;
+	}
+
+
+	public function get_id_type_utilisateur()
+	{
+		return $this->_id_type_utilisateur ;
+	}
+	
+	public function set_id_type_utilisateur($id_type)
+	{
+		$this->_id_type_utilisateur = $id_type ;
 	}
 }
 

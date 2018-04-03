@@ -161,7 +161,7 @@ DELIMITER ;
 /*Récupération d'un utilisateur par identifiant et mot de passe*/
 DELIMITER |
 DROP PROCEDURE getUserByIdentification IF EXISTS
-CREATE PROCEDURE getUserByIdentification ( IN identifiant int(11), IN mdp varchar(100) )
+CREATE PROCEDURE getUserByIdentification ( IN identifiant int(100), IN mdp varchar(100) )
 BEGIN
 	SELECT *
 	FROM utilisateur
@@ -173,8 +173,8 @@ DELIMITER ;
 
 /*Récupération d'un utilisateur par son id*/
 DELIMITER |
-DROP PROCEDURE getUserByIdentification IF EXISTS
-CREATE PROCEDURE getUserByIdentification ( IN id int(11) )
+DROP PROCEDURE getUserById IF EXISTS
+CREATE PROCEDURE getUserById ( IN id int(11) )
 BEGIN
 	SELECT *
 	FROM utilisateur
