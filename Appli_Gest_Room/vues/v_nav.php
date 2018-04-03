@@ -8,19 +8,31 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+<<<<<<< HEAD
           <a class="nav-link" href="index.php?uc=home&action=accueil">
+=======
+          <a class="nav-link" href="index.php?action=accueil">
+>>>>>>> origin/master
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Accueil</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+<<<<<<< HEAD
           <a class="nav-link" href="index.php?uc=salles&action=salles">
+=======
+          <a class="nav-link" href="index.php?action=salles">
+>>>>>>> origin/master
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Salles</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+<<<<<<< HEAD
           <a class="nav-link" href="index.php?uc=reservations&action=reservations">
+=======
+          <a class="nav-link" href="index.php?action=reservations">
+>>>>>>> origin/master
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Mes réservations</span>
           </a>

@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 <div class="content-wrapper">
     <div class="container-fluid">
+=======
+<div class="container-fluid">
+>>>>>>> origin/master
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">

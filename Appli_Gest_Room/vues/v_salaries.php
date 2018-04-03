@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 <div class="content-wrapper">
     <div class="container-fluid">
+=======
+<div class="container-fluid">
+>>>>>>> origin/master
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
@@ -498,4 +502,8 @@
         </div>
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>*
+<<<<<<< HEAD
       </div>-->
+=======
+      </div>
+>>>>>>> origin/master
