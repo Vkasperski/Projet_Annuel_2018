@@ -159,28 +159,28 @@ DELIMITER ;
 
 
 /*Récupération d'un utilisateur par identifiant et mot de passe*/
-DELIMITER |
-DROP PROCEDURE getUserByIdentification IF EXISTS
-CREATE PROCEDURE getUserByIdentification ( IN identifiant int(100), IN mdp varchar(100) )
-BEGIN
-	SELECT *
-	FROM utilisateur
-	WHERE identifiant_utilisateur = identifiant
-	AND mdp_utilisateur = mdp |
-END |
-DELIMITER ;
+/*DELIMITER |
+/*DROP PROCEDURE getUserByIdentification IF EXISTS
+/*CREATE PROCEDURE getUserByIdentification ( IN identifiant int(100), IN mdp varchar(100) )
+/*BEGIN
+/*	SELECT *
+/*	FROM utilisateur
+/*	WHERE identifiant_utilisateur = identifiant
+/*	AND mdp_utilisateur = mdp |
+/*END |
+/*DELIMITER ;
 
 
 /*Récupération d'un utilisateur par son id*/
-DELIMITER |
-DROP PROCEDURE getUserById IF EXISTS
-CREATE PROCEDURE getUserById ( IN id int(11) )
-BEGIN
-	SELECT *
-	FROM utilisateur
-	WHERE id_utilisateur = id |
-END |
-DELIMITER ;
+/*DELIMITER |
+/*DROP PROCEDURE getUserById IF EXISTS
+/*CREATE PROCEDURE getUserById ( IN id int(11) )
+/*BEGIN
+/*	SELECT *
+/*	FROM utilisateur
+/*	WHERE id_utilisateur = id |
+/*END |
+/*DELIMITER ;
 
 
 /*Récupération des utilisateur par type d'utilisateur*/
@@ -208,25 +208,25 @@ DELIMITER ;
 
 
 /*Récupération de toutes les salles*/
-DELIMITER |
-DROP PROCEDURE getSalles IF EXISTS
-CREATE PROCEDURE getSalles ()
-BEGIN
-	SELECT * FROM salle |
-END |
-DELIMITER ;
+/*DELIMITER |
+/*DROP PROCEDURE getSalles IF EXISTS
+/*CREATE PROCEDURE getSalles ()
+/*BEGIN
+/*	SELECT * FROM salle |
+/*END |
+/*DELIMITER ;
 
 
 /*Récupération des salles disponnible */
-DELIMITER |
-DROP PROCEDURE getSallesDispo IF EXISTS
-CREATE PROCEDURE getSallesDispo ( IN dispo boolean )
-BEGIN
-	SELECT *
-	FROM salle
-	WHERE disponibilite_salle = dispo |
-END |
-DELIMITER ;
+/*DELIMITER |
+/*DROP PROCEDURE getSallesDispo IF EXISTS
+/*CREATE PROCEDURE getSallesDispo ( IN dispo boolean )
+/*BEGIN
+/*	SELECT *
+/*	FROM salle
+/*	WHERE disponibilite_salle = dispo |
+/*END |
+/*DELIMITER ;
 
 
 /*Récupération des salles dont la réservation est possible */
@@ -249,10 +249,20 @@ DELIMITER ;
 
 
 /*Récupération de tous les utilisateurs*/
+/*DELIMITER |
+/*DROP PROCEDURE getUsers IF EXISTS
+/*CREATE PROCEDURE getUsers ()
+/*BEGIN
+/*	SELECT * FROM utilisateur |
+/*END |
+/*DELIMITER ;
+
+
+/*Récupération de toutes les reservations*/
 DELIMITER |
-DROP PROCEDURE getUsers IF EXISTS
-CREATE PROCEDURE getUsers ()
+DROP PROCEDURE getReservations IF EXISTS
+CREATE PROCEDURE getReservations ()
 BEGIN
-	SELECT * FROM utilisateur |
+	SELECT * FROM reservation |
 END |
 DELIMITER ;
