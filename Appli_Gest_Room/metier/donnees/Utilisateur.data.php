@@ -62,6 +62,47 @@ class utilisateurData {
 		) ;
 		return $user;
 	}
+
+	public function get_utilisateurs_by_type( $id )
+	{
+		$req = $GLOBALS["bdd"]->prepare("call getUsersByTypeUser(?)");
+		$req->execute(array($id));
+		$users = array();
+		$i = 0;
+		while ( $datas = $req->fetch() )
+		{
+			$users[$i] = array
+			(
+				"id_utilisateur" => $datas["id_utilisateur"],
+				"nom_utilisateur" => $datas["nom_utilisateur"],
+				"prenom_utilisateur" => $datas["prenom_utilisateur"],
+				"mail_utilisateur" => $datas["mail_utilisateur"],
+				"identifiant_utilisateur" => $datas["identifiant_utilisateur"],
+				"mdp_utilisateur" => $datas["mdp_utilisateur"],
+				"id_type_utilisateur" => $datas["id_type_utilisateur"]
+			);
+			$i++ ;
+		}
+		return $users ;
+	}
+
+	public function create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser)
+	{
+		$req = $GLOBALS["bdd"]->prepare("call createUser(?,?,?,?,?,?)");
+		return $req->execute(array($nom , $prenom , $mail , $identifiant , $mdp , $typeUser));
+	}
+
+	public function update_user($id, $nom , $prenom , $mail , $identifiant , $mdp , $typeUser)
+	{
+		$req = $GLOBALS["bdd"]->prepare("call updateUser(?,?,?,?,?,?,?)");
+		return $req->execute(array($id, $nom , $prenom , $mail , $identifiant , $mdp , $typeUser));	
+	}
+
+	public function delete_user($id)
+	{
+		$req = $GLOBALS["bdd"]->prepare("call deleteUser(?)");
+		return $req->execute(array($id));
+	}
 }
 
 ?>

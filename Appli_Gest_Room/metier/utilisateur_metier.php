@@ -57,11 +57,52 @@ class utilisateur_metier
 		) ;
 
 		return $user ;
-	}	
+	}
+	
+	public function get_utilisateurs_by_type( $id )
+	{
+		$userData = new utilisateurData() ;
+		
+		$i = 0; 
+		foreach ($userData->get_utilisateurs_by_type($id) as $unUser) {
+			$tab_users[$i] = new utilisateur(
+				$unUser["id_utilisateur"],
+				$unUser["nom_utilisateur"],
+				$unUser["prenom_utilisateur"],
+				$unUser["mail_utilisateur"],
+				$unUser["identifiant_utilisateur"],
+				$unUser["mdp_utilisateur"],
+				$unUser["id_type_utilisateur"]
+			) ;
+			$i++;
+		}
+		return $tab_users ;
+	}
+
+	public function create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser)
+	{
+		$userData = new utilisateurData() ;
+		return $userData->create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser));
+	}
+
+	public function update_user($id, $nom , $prenom , $mail , $identifiant , $mdp , $typeUser)
+	{
+		$userData = new utilisateurData() ;
+		return $userData->update_user($id, $nom , $prenom , $mail , $identifiant , $mdp , $typeUser));
+	}
+
+	public function delete_user($id)
+	{
+		$userData = new utilisateurData() ;
+		return $userData->delete_user($id);
+	}
 }
 
 $userM = new utilisateur_metier();
-$user = $userM->get_utilisateur_by_connection('vka','mdp');
-echo($user->get_id_utilisateur(). " " . $user->get_nom_utilisateur(). " " . $user->get_prenom_utilisateur(). " " . $user->get_mail_utilisateur(). " " . $user->get_identifiant_utilisateur(). " " . $user->get_mdp_utilisateur(). " " . $user->get_id_type_utilisateur()) ;
+$user = $userM->delete_user();
+
+
+
+?></br><?php
 
 ?>

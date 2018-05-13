@@ -9,11 +9,22 @@ class reservation
 
 	private $_id_utilisateur ;
 	private $_id_salle ;
-	private $_id_niveau ;
 	private $_debut_reservation ;
 	private $_fin_reservation ;
+	private $_est_facultatif ;
+	private $_description ;
 
 
+	//Constructeur
+	public function __construct( $id_user, $id_salle, $debut_reservation, $fin_reservation, $facultatif, $description )
+	{
+		$this->_id_utilisateur = $id_user ;
+		$this->_id_salle = $id_salle ;
+		$this->_est_facultatif = $facultatif ;
+		$this->_debut_reservation = $debut_reservation ;
+		$this->_fin_reservation = $fin_reservation ;
+		$this->_description = $description ;
+	}
 
 
 // assesseurs
@@ -41,20 +52,20 @@ class reservation
 	}
 
 
-	public function get_id_niveau()
+	public function get_est_facultatif()
 	{
-		return $this->_id_niveau ;
+		return $this->_est_facultatif ;
 	}
 
-	public function set_id_niveau($id_niveau)
+	public function set_est_facultatif($facultatif)
 	{
-		$this->_id_niveau = $id_niveau ;
+		$this->_est_facultatif = $facultatif ;
 	}
 
 
 	public function get_debut_reservation()
 	{
-		return $this->_id_debut_reservation ;
+		return $this->_debut_reservation ;
 	}
 
 	public function set_debut_reservation($debut_reservation)
@@ -71,6 +82,16 @@ class reservation
 	public function set_fin_reservation($fin_reservation)
 	{
 		$this->_fin_reservation = $fin_reservation ;
+	}
+
+	public function get_description()
+	{
+		return $this->_description ;
+	}
+
+	public function set_description($description)
+	{
+		$this->_description = $description ;
 	}
 
 }

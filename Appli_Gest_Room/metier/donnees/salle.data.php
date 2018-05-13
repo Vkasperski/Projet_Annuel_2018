@@ -54,5 +54,23 @@ class salleData
 		}
 		return $salles ;
 	}
+
+	public function create_salle($nom, $disponibilite)
+	{
+		$req  = $GLOBALS["bdd"]->prepare("call createSalle(?,?)");
+		return $req->execute(array($nom,$disponibilite));
+	}
+
+	public function update_salle($id, $nom, $disponibilite)
+	{
+		$req  = $GLOBALS["bdd"]->prepare("call updateSalle(?,?,?)");
+		return $req->execute(array($id,$nom,$disponibilite));
+	}
+
+	public function delete_salle($id)
+	{
+		$req = $GLOBALS["bdd"]->prepare("call deleteSalle(?)");
+		return $req->execute(array($id));
+	}
 }
 ?>
