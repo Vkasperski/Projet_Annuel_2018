@@ -6,6 +6,7 @@ $action = $_REQUEST['action'];
 switch($action){
 	case 'demandeConnexion':{
 		include("vues/v_connexion.php");
+		include("metier/utilisateur_metier.php");
 		break;
 	}
 	case 'valideConnexion':{
@@ -37,9 +38,17 @@ switch($action){
 		//
 		//}
 		//break;
+		
+		$utilisaeurM = new utilisaeur_metier();
+		$utilisaeur = $utilisaeurM->get_utilisateur_by_connection($login,$mdp);
+		if(is_null($utilisaeur)){
+			echo "lol";
+		}
+
 	}
 	default :{
 		include("vues/v_connexion.php");
+		
 		break;
 	}
 }

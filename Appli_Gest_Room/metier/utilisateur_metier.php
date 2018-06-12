@@ -82,27 +82,34 @@ class utilisateur_metier
 	public function create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser)
 	{
 		$userData = new utilisateurData() ;
-		return $userData->create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser));
+		return $userData->create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser);
 	}
 
 	public function update_user($id, $nom , $prenom , $mail , $identifiant , $mdp , $typeUser)
 	{
 		$userData = new utilisateurData() ;
-		return $userData->update_user($id, $nom , $prenom , $mail , $identifiant , $mdp , $typeUser));
+		return $userData->update_user($id, $nom , $prenom , $mail , $identifiant , $mdp , $typeUser);
 	}
 
 	public function delete_user($id)
 	{
-		$userData = new utilisateurData() ;
-		return $userData->delete_user($id);
+		$userData = new utilisateurData();
+		$userData->delete_user($id);
 	}
 }
 
-$userM = new utilisateur_metier();
-$user = $userM->delete_user();
-
-
-
-?></br><?php
 
 ?>
+
+
+logiciel SaaS couvrant de bout en bout les activités de sourcing, Contract & Service Delivery Management des DSI & Directions Digitales
+
+
+Veille & Intelligence économique
+Gestion stratégique de projets IT
+Gestion d’appels d’offres
+Négociation contractuelle
+Gestion avancée des actifs contractuels
+Pilotage Budgétaire
+Service Delivery Management
+Service Owner Management

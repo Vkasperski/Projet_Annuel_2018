@@ -2,8 +2,6 @@
 //require_once("include/fonction.php");
 
 include("vues/v_header.php");
-<<<<<<< HEAD
-
 
        
 if(!isset($_REQUEST['uc'])){
@@ -32,7 +30,7 @@ switch($uc){
                 break; 
 	}
 }
-=======
+//=======
 include("vues/v_nav.php");
 
        
@@ -62,8 +60,6 @@ switch ($action) {
 //    }
 
 }
-       
->>>>>>> origin/master
 
 
 include("vues/v_foot.php") ;
