@@ -1,7 +1,7 @@
 <?php
 include("connexion_bdd.php");
 
-class type_user_data 
+class type_utilisateur_data 
 {
 	public function get_type_utilisateurs()
 	{
@@ -28,8 +28,8 @@ class type_user_data
 		$data = $req->fetch();
 		$types_utilisateur = array
 		(
-			"id_type_utilisateur" => $datas["id_type_utilisateur"],
-				"nom_type_utilisateur" => $datas["nom_type_utilisateur"]
+			"id_type_utilisateur" => $data["id_type_utilisateur"],
+			"nom_type_utilisateur" => $data["nom_type_utilisateur"]
 		);
 		return $types_utilisateur ;
 	}
@@ -37,7 +37,7 @@ class type_user_data
 	public function create_type_utilisateur($nom_type)
 	{
 		$req  = $GLOBALS["bdd"]->prepare("call createTypeUtilisateur(?)");
-		return $req->execute(array($nom));
+		return $req->execute(array($nom_type));
 	}
 
 	public function update_type_utilisateur($id, $nom)
@@ -48,7 +48,7 @@ class type_user_data
 
 	public function delete_type_utilisateur($id)
 	{
-		$req = $GLOBALS["bdd"]->prepare("call deleteTypeUtilisateur(?)");
+		$req = $GLOBALS["bdd"]->prepare("call deleteTypeUser(?)");
 		return $req->execute(array($id));
 	}
 }
