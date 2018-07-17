@@ -15,7 +15,8 @@ class salleData
 			(
 				"id_salle" => $datas["id_salle"],
 				"nom_salle" => $datas["nom_salle"],
-				"disponibilite_salle" => $datas["disponibilite_salle"]
+				"disponibilite_salle" => $datas["disponibilite_salle"],
+				"descriptif_salle" => $datas["descriptif_salle"]
 			);
 			$i++;
 		}
@@ -31,7 +32,8 @@ class salleData
 		(
 			"id_salle" => $data["id_salle"],
 			"nom_salle" => $data["nom_salle"],
-			"disponibilite_salle" => $data["disponibilite_salle"]
+			"disponibilite_salle" => $data["disponibilite_salle"],
+			"descriptif_salle" => $datas["descriptif_salle"]
 		);
 		return $salle ;
 	}
@@ -48,23 +50,24 @@ class salleData
 			(
 				"id_salle" => $datas["id_salle"],
 				"nom_salle" => $datas["nom_salle"],
-				"disponibilite_salle" => $datas["disponibilite_salle"]
+				"disponibilite_salle" => $datas["disponibilite_salle"],
+				"descriptif_salle" => $datas["descriptif_salle"]
 			);
 			$i++;
 		}
 		return $salles ;
 	}
 
-	public function create_salle($nom, $disponibilite)
+	public function create_salle($nom, $disponibilite, $descriptif)
 	{
-		$req  = $GLOBALS["bdd"]->prepare("call createSalle(?,?)");
-		return $req->execute(array($nom,$disponibilite));
+		$req  = $GLOBALS["bdd"]->prepare("call createSalle(?,?,?)");
+		return $req->execute(array($nom,$disponibilite, $descriptif));
 	}
 
-	public function update_salle($id, $nom, $disponibilite)
+	public function update_salle($id, $nom, $disponibilite, $descriptif)
 	{
-		$req  = $GLOBALS["bdd"]->prepare("call updateSalle(?,?,?)");
-		return $req->execute(array($id,$nom,$disponibilite));
+		$req  = $GLOBALS["bdd"]->prepare("call updateSalle(?,?,?,?)");
+		return $req->execute(array($id,$nom,$disponibilite, $descriptif));
 	}
 
 	public function delete_salle($id)

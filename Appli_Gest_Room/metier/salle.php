@@ -9,6 +9,7 @@ class salle
 	private $_id_salle ;
 	private $_nom_salle ;
 	private $_disponibilite_salle ;
+	private $_descriptif_salle ;
 
 
 	// Constructeur
@@ -47,5 +48,17 @@ class salle
 	{
 		$this->_disponibilite_salle = $disponibilite_salle ;
 	}
+
+	public function get_descriptif_salle()
+	{
+		return $this->_descriptif_salle ;
+	}
+	
+	public function set_descriptif_salle($descriptif_salle)
+	{
+		$this->_descriptif_salle = $descriptif_salle ;
+	}
+
+
 }
 ?>

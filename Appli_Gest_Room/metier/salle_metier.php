@@ -14,7 +14,8 @@ class salle_metier
 			$tab_salles[$i] = new salle(
 				$uneSalle["id_salle"],
 				$uneSalle["nom_salle"],
-				$uneSalle["disponibilite_salle"]
+				$uneSalle["disponibilite_salle"],
+				$uneSalle["descriptif_salle"]
 			);
 			$i++;
 		}
@@ -30,7 +31,8 @@ class salle_metier
 		(
 			$salleArray["id_salle"],
 			$salleArray["nom_salle"],
-			$salleArray["disponibilite_salle"]
+			$salleArray["disponibilite_salle"],
+			$salleArray["descriptif_salle"]
 		);
 		return $salle ;
 	}
@@ -45,7 +47,8 @@ class salle_metier
 			$tab_salles[$i] = new salle(
 				$uneSalle["id_salle"],
 				$uneSalle["nom_salle"],
-				$uneSalle["disponibilite_salle"]
+				$uneSalle["disponibilite_salle"],
+				$uneSalle["descriptif_salle"]
 			);
 			$i++;
 		}
