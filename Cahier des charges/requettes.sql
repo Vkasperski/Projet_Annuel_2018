@@ -163,6 +163,18 @@ DELIMITER ;
 /*DELIMITER ;
 
 
+/*Récupération des types_utilisateurs*/
+DELIMITER |
+DROP PROCEDURE getTypeUsers IF EXISTS
+CREATE PROCEDURE getTypeUsers ()
+BEGIN
+	SELECT *
+	FROM type_utilisateur |
+END |
+DELIMITER ;
+
+
+
 /*Récupération d'un utilisateur par identifiant et mot de passe*/
 /*DELIMITER |
 /*DROP PROCEDURE getUserByIdentification IF EXISTS
