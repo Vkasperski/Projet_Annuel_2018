@@ -19,6 +19,9 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `salles_de_reunion`
 --
+CREATE DATABASE `salles_de_reunion`;
+use `salles_de_reunion`;
+
 
 DELIMITER $$
 --
