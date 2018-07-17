@@ -265,16 +265,23 @@ CREATE PROCEDURE getReservationsPossibles ( IN debut Datetime, IN fin Datetime )
 BEGIN 
 	SELECT *
 	FROM salle
-	WHERE id_salle IN (  
+	WHERE id_salle NOT IN (  
 		SELECT id_salle
 		FROM reservation
-		WHERE est_facultatif = true
-		OR ( debut_reservation NOT BETWEEN debut AND fin
-		AND fin_reservation NOT BETWEEN debut AND fin )
+		WHERE est_facultatif = false
+		OR debut_reservation  BETWEEN debut AND fin
+		OR fin_reservation BETWEEN debut AND fin
 	)
 	AND disponibilite_salle = true |
 END |
 DELIMITER ;
+
+/*Récupère les réservations d'une salle ou d'un utilisateur à une date passé en paramettre */
+SELECT DISTINCT * 
+FROM reservations
+WHERE DATE(debut_reservation) = DATE(date_res)
+AND ( id_salle = id_salle_res 
+OR id_utilisateur = id_user );
 
 
 /*Récupération de tous les utilisateurs*/
