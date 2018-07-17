@@ -1,12 +1,12 @@
 /*Création d'une réservation*/
-DELIMITER |
-DROP PROCEDURE Reserver IF EXISTS 
-CREATE PROCEDURE Reserver(IN id_user int(11), IN id_salle_res int(11), IN debut_res Datetime, IN fin_res Datetime, IN est_facult boolean, IN descri varchar(255))
-BEGIN
-	INSERT INTO reservation ( id_utilisateur, id_salle, debut_reservation, fin_reservation, est_facultatif, description ) 
-	VALUES ( id_user, id_salle_res, debut_res, fin_res, est_facult, descri ) |	
-END|
-DELIMITER ;
+/*DELIMITER |
+/*DROP PROCEDURE createReservation IF EXISTS 
+/*CREATE PROCEDURE createReservation(IN id_user int(11), IN id_salle_res int(11), IN debut_res Datetime, IN fin_res Datetime, IN est_facult boolean, IN descri varchar(255))
+/*BEGIN
+/*	INSERT INTO reservation ( id_utilisateur, id_salle, debut_reservation, fin_reservation, est_facultatif, description ) 
+/*	VALUES ( id_user, id_salle_res, debut_res, fin_res, est_facult, descri ) |	
+/*END|
+/*DELIMITER ;
 
 
 /*Création d'un utilisateur*/
@@ -32,14 +32,14 @@ DELIMITER ;
 
 
 /*Création d'un type utilisateur*/
-DELIMITER |
-DROP PROCEDURE CreateTypeUser IF EXISTS
-CREATE PROCEDURE CreateTypeUser( IN nom_type varchar(50) )
-BEGIN
-	INSERT INTO type_utilisateur ( nom_type_utilisateur ) 
-	VALUES ( nom_type ) |
-END |
-DELIMITER;
+/*DELIMITER |
+/*DROP PROCEDURE CreateTypeUser IF EXISTS
+/*CREATE PROCEDURE CreateTypeUser( IN nom_type varchar(50) )
+/*BEGIN
+/*	INSERT INTO type_utilisateur ( nom_type_utilisateur ) 
+/*	VALUES ( nom_type ) |
+/*END |
+/*DELIMITER;
 
 
 /*Modification d'un utilisateur*/
@@ -91,15 +91,15 @@ DELIMITER ;
 
 
 /*Modifier les types d'utilisateur*/
-DELIMITER |
-DROP PROCEDURE updateTypeUtilisateur IF EXISTS
-CREATE PROCEDURE updateTypeUtilisateur ( IN id int(11), IN nom varchar(50) )
-BEGIN
-	UPDATE type_utilisateur
-	SET nom_type_utilisateur = nom
-	WHERE id_type_utilisateur = id |
-END |
-DELIMITER ;
+/*DELIMITER |
+/*DROP PROCEDURE updateTypeUtilisateur IF EXISTS
+/*CREATE PROCEDURE updateTypeUtilisateur ( IN id int(11), IN nom varchar(50) )
+/*BEGIN
+/*	UPDATE type_utilisateur
+/*	SET nom_type_utilisateur = nom
+/*	WHERE id_type_utilisateur = id |
+/*END |
+/*DELIMITER ;
 
 
 /*Suppression d'une réservation*/
@@ -116,19 +116,19 @@ DELIMITER ;
 
 
 /*Suppression d'un type d'utilisateur*/
-DELIMITER |
-DROP PROCEDURE deleteTypeUser IF EXISTS
-CREATE PROCEDURE deleteTypeUser ( IN id int(11) )
-BEGIN
-	UPDATE utilisateurs
-	SET id_type_utilisateur = null
-	WHERE id_type_utilisateur = id |
-
-	DELETE 
-	FROM type_utilisateur
-	WHERE id_type_utilisateur = id |
-END |
-DELIMITER ; 
+/*DELIMITER |
+/*DROP PROCEDURE deleteTypeUser IF EXISTS
+/*CREATE PROCEDURE deleteTypeUser ( IN id int(11) )
+/*BEGIN
+/*	UPDATE utilisateurs
+/*	SET id_type_utilisateur = null
+/*	WHERE id_type_utilisateur = id |
+/*
+/*	DELETE 
+/*	FROM type_utilisateur
+/*	WHERE id_type_utilisateur = id |
+/*END |
+/*DELIMITER ; 
 
 
 /*Suppression d'un utilisateur*/
@@ -164,14 +164,14 @@ DELIMITER ;
 
 
 /*Récupération des types_utilisateurs*/
-DELIMITER |
-DROP PROCEDURE getTypeUsers IF EXISTS
-CREATE PROCEDURE getTypeUsers ()
-BEGIN
-	SELECT *
-	FROM type_utilisateur |
-END |
-DELIMITER ;
+/*DELIMITER |
+/*DROP PROCEDURE getTypeUsers IF EXISTS
+/*CREATE PROCEDURE getTypeUsers ()
+/*BEGIN
+/*	SELECT *
+/*	FROM type_utilisateur |
+/*END |
+/*DELIMITER ;
 
 
 
@@ -262,7 +262,7 @@ DELIMITER ;
 DELIMITER |
 DROP PROCEDURE getReservationsPossibles IF EXISTS
 CREATE PROCEDURE getReservationsPossibles ( IN debut Datetime, IN fin Datetime )
-BEGIN
+BEGIN 
 	SELECT *
 	FROM salle
 	WHERE id_salle IN (  

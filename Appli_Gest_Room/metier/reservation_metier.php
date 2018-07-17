@@ -75,9 +75,7 @@ class reservation_metier
 
 
 $resM = new reservation_metier();
-$deb = DateTime::createFromFormat('Y-m-d H:i:s','2018-05-13 08:00:00');
-$fin = DateTime::createFromFormat('Y-m-d H:i:s','2018-05-13 10:00:00');
-echo($resM->create_reservation(1,1,$deb,$fin,0,"test creation"));
+echo($resM->create_reservation(1,1,"2018-07-13 08:00:00","2018-07-13 10:00:00",0,"new test creation"));
 
 //for($i = 1; $i<=9;$i++)
 //{
