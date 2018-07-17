@@ -1,11 +1,9 @@
-create database salles_de_reunion;
-use salles_de_reunion;
 -- phpMyAdmin SQL Dump
 -- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 14 Mai 2018 à 06:22
+-- Généré le :  Mar 17 Juillet 2018 à 11:00
 -- Version du serveur :  10.1.21-MariaDB
 -- Version de PHP :  5.6.30
 
@@ -32,6 +30,14 @@ INSERT INTO reservation ( id_utilisateur, id_salle, debut_reservation, fin_reser
 CREATE DEFINER=`root`@`localhost` PROCEDURE `createSalle` (IN `nom` VARCHAR(100), IN `disponibilite` BOOLEAN)  NO SQL
 INSERT INTO salles( nom_salle, disponibilite_salle ) VALUES ( nom, disponibilite )$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `createTypeUtilisateur` (IN `nom` VARCHAR(50))  NO SQL
+BEGIN
+
+INSERT INTO type_utilisateur( nom_type_utilisateur )
+VALUES ( nom ) ;
+ 
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `createUser` (IN `nom` VARCHAR(100), IN `prenom` VARCHAR(100), IN `mail` VARCHAR(200), IN `identifiant` VARCHAR(100), IN `mdp` VARCHAR(100), IN `typeUser` INT(11))  NO SQL
 INSERT INTO utilisateurs ( nom_utilisateur, prenom_utilisateur, mail_utilisateur, identifiant_utilisateur, mdp_utilisateur, id_type_utilisateur ) VALUES ( nom, prenom, mail, identifiant, mdp, typeUser )$$
 
@@ -44,6 +50,17 @@ BEGIN
     DELETE 
     FROM salles 
     WHERE id_salle = id ;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteTypeUser` (IN `id` INT(11))  NO SQL
+BEGIN
+	UPDATE utilisateurs
+	SET id_type_utilisateur = null
+	WHERE id_type_utilisateur = id ;
+
+	DELETE 
+	FROM type_utilisateur
+	WHERE id_type_utilisateur = id ;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteUser` (IN `id` INT(11))  NO SQL
@@ -84,6 +101,21 @@ WHERE disponibilite_salle = estDispo$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getSalles` ()  READS SQL DATA
 SELECT * FROM salles$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getTypeUsers` ()  NO SQL
+BEGIN
+
+SELECT *
+FROM type_utilisateur;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getTypeUsersById` (IN `id` INT(11))  NO SQL
+BEGIN
+	SELECT *
+	FROM type_utilisateur 
+	WHERE id_type_utilisateur = id;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getUserById` (IN `id` INT(11))  READS SQL DATA
 SELECT *
 FROM utilisateurs
@@ -108,6 +140,15 @@ UPDATE salles
 SET nom_salle = nom,
 	disponibilite_salle = disponibilite 
 WHERE id_salle = id$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateTypeUtilisateur` (IN `id` INT(11), IN `nom` VARCHAR(50))  NO SQL
+BEGIN
+
+UPDATE type_utilisateur
+SET nom_type_utilisateur = nom
+WHERE id_type_utilisateur = id ;
+
+END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUser` (IN `id_user` INT(11), IN `nom` VARCHAR(100), IN `prenom` VARCHAR(100), IN `mail` VARCHAR(200), IN `identifiant` VARCHAR(100), IN `mdp` VARCHAR(100), IN `typeUser` INT(11))  NO SQL
 UPDATE utilisateurs 
@@ -155,23 +196,24 @@ INSERT INTO `reservations` (`debut_reservation`, `fin_reservation`, `est_faculta
 CREATE TABLE `salles` (
   `id_salle` int(11) NOT NULL,
   `nom_salle` varchar(100) DEFAULT NULL,
-  `disponibilite_salle` tinyint(1) DEFAULT NULL
+  `disponibilite_salle` tinyint(1) DEFAULT NULL,
+  `descriptif` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `salles`
 --
 
-INSERT INTO `salles` (`id_salle`, `nom_salle`, `disponibilite_salle`) VALUES
-(1, 'salle 1', 1),
-(2, 'salle 2', 1),
-(3, 'salle 3', 1),
-(4, 'salle 4', 0),
-(5, 'salle 5', 1),
-(6, 'salle 6', 0),
-(7, 'salle 7', 1),
-(8, 'salle 8', 1),
-(9, 'salle 9', 0);
+INSERT INTO `salles` (`id_salle`, `nom_salle`, `disponibilite_salle`, `descriptif`) VALUES
+(1, 'salle 1', 1, NULL),
+(2, 'salle 2', 1, NULL),
+(3, 'salle 3', 1, NULL),
+(4, 'salle 4', 0, NULL),
+(5, 'salle 5', 1, NULL),
+(6, 'salle 6', 0, NULL),
+(7, 'salle 7', 1, NULL),
+(8, 'salle 8', 1, NULL),
+(9, 'salle 9', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -189,8 +231,8 @@ CREATE TABLE `type_utilisateur` (
 --
 
 INSERT INTO `type_utilisateur` (`id_type_utilisateur`, `nom_type_utilisateur`) VALUES
-(1, 'Administrateur'),
-(2, 'collaborateur');
+(1, 'Admin'),
+(4, 'Collaborateur');
 
 -- --------------------------------------------------------
 
@@ -214,8 +256,8 @@ CREATE TABLE `utilisateurs` (
 
 INSERT INTO `utilisateurs` (`id_utilisateur`, `nom_utilisateur`, `prenom_utilisateur`, `mail_utilisateur`, `identifiant_utilisateur`, `mdp_utilisateur`, `id_type_utilisateur`) VALUES
 (1, 'kasperski', 'victor', 'vk@sdsd', 'vka', 'mdp', 1),
-(2, 'BLAIX', 'Camille', 'cbl@gmail.com', 'cbl', 'cbl', 2),
-(3, 'daurel', 'sebastien', 's.d@sdsd', 'sda', 'sda', 2),
+(2, 'BLAIX', 'Camille', 'cbl@gmail.com', 'cbl', 'cbl', 4),
+(3, 'daurel', 'sebastien', 's.d@sdsd', 'sda', 'sda', 4),
 (4, 'GUERAR', 'Frank', 'fgu@gmail.com', 'fgu', 'fgu', 1);
 
 --
@@ -261,7 +303,7 @@ ALTER TABLE `salles`
 -- AUTO_INCREMENT pour la table `type_utilisateur`
 --
 ALTER TABLE `type_utilisateur`
-  MODIFY `id_type_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_type_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
