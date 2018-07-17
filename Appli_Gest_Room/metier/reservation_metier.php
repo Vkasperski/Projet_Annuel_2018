@@ -2,6 +2,12 @@
 include("reservation.php");
 include("donnees/reservation.data.php");
 
+
+
+//https://openclassrooms.com/forum/sujet/verifier-une-date-par-rapport-a-deux-autres-dates
+
+
+
 class reservation_metier
 {
 	// Récupération de toute les Reservations dans un tableau de reservation
