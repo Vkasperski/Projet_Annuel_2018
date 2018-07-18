@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 18 juil. 2018 à 16:29
+-- Généré le :  mer. 18 juil. 2018 à 16:49
 -- Version du serveur :  10.1.26-MariaDB
 -- Version de PHP :  7.1.9
 
@@ -21,22 +21,19 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `salles_de_reunion`
 --
-CREATE database `salles_de_reunion`;
-use `salles_de_reunion`;
-
 
 DELIMITER $$
 --
 -- Procédures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `createReservation` (IN `id_user` INT(11), IN `id_salle_res` INT(11), IN `debut_res` DATETIME, IN `fin_res` DATETIME, IN `est_facult` BOOLEAN, IN `descri` VARCHAR(255))  MODIFIES SQL DATA
-INSERT INTO reservation ( id_utilisateur, id_salle, debut_reservation, fin_reservation, est_facultatif, description ) VALUES ( id_user, id_salle_res, debut_res, fin_res, est_facult, descri )$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `createReservation` (IN `id_user` INT(11), IN `id_salle_res` INT(11), IN `debut_res` DATETIME, IN `fin_res` DATETIME, IN `est_facult` BOOLEAN, IN `descri` VARCHAR(255), IN `invite` BOOLEAN)  MODIFIES SQL DATA
+INSERT INTO reservation ( id_utilisateur, id_salle, debut_reservation, fin_reservation, est_facultatif, description, est_invite ) VALUES ( id_user, id_salle_res, debut_res, fin_res, est_facult, descri, invite )$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `createSalle` (IN `nom` VARCHAR(100), IN `disponibilite` BOOLEAN)  NO SQL
 INSERT INTO salles( nom_salle, disponibilite_salle ) VALUES ( nom, disponibilite )$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `createUser` (IN `nom` VARCHAR(100), IN `prenom` VARCHAR(100), IN `mail` VARCHAR(200), IN `identifiant` VARCHAR(100), IN `mdp` VARCHAR(100), IN `typeUser` INT(11))  NO SQL
-INSERT INTO utilisateurs ( nom_utilisateur, prenom_utilisateur, mail_utilisateur, identifiant_utilisateur, mdp_utilisateur, id_type_utilisateur ) VALUES ( nom, prenom, mail, identifiant, mdp, typeUser )$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `createUser` (IN `nom` VARCHAR(100), IN `prenom` VARCHAR(100), IN `mail` VARCHAR(200), IN `identifiant` VARCHAR(100), IN `mdp` VARCHAR(100), IN `typeUser` VARCHAR(20), IN `admin` BOOLEAN, IN `pdg` BOOLEAN, IN `bloque` INT(1))  NO SQL
+INSERT INTO utilisateurs ( nom_utilisateur, prenom_utilisateur, mail_utilisateur, identifiant_utilisateur, mdp_utilisateur, id_type_utilisateur, est_admin, est_pdg, est_bloque ) VALUES ( nom, prenom, mail, identifiant, mdp, typeUser, admin, pdg, bloque )$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteSalle` (IN `id` INT(11))  MODIFIES SQL DATA
 BEGIN	
@@ -124,14 +121,17 @@ SET nom_salle = nom,
 	disponibilite_salle = disponibilite 
 WHERE id_salle = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUser` (IN `id_user` INT(11), IN `nom` VARCHAR(100), IN `prenom` VARCHAR(100), IN `mail` VARCHAR(200), IN `identifiant` VARCHAR(100), IN `mdp` VARCHAR(100), IN `typeUser` INT(11))  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUser` (IN `id_user` INT(11), IN `nom` VARCHAR(100), IN `prenom` VARCHAR(100), IN `mail` VARCHAR(200), IN `identifiant` VARCHAR(100), IN `mdp` VARCHAR(100), IN `typeUser` INT(11), IN `admin` BOOLEAN, IN `pdg` BOOLEAN, IN `bloque` INT(1))  NO SQL
 UPDATE utilisateurs 
 SET nom_utilisateur = nom, 
 	prenom_utilisateur = prenom, 
 	mail_utilisateur = mail, 
     identifiant_utilisateur = identifiant, 
 	mdp_utilisateur = mdp, 
-	id_type_utilisateur = typeUser
+	id_type_utilisateur = typeUser,
+    est_admin = admin,
+    est_pdg = pdg,
+    est_bloque = bloque
 WHERE id_utilisateur = id_user$$
 
 DELIMITER ;
@@ -192,17 +192,6 @@ INSERT INTO `salles` (`id_salle`, `nom_salle`, `disponibilite_salle`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `type_utilisateur`
---
-
-CREATE TABLE `type_utilisateur` (
-  `id_type_utilisateur` int(11) NOT NULL,
-  `nom_type_utilisateur` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `utilisateurs`
 --
 
@@ -247,12 +236,6 @@ ALTER TABLE `salles`
   ADD PRIMARY KEY (`id_salle`);
 
 --
--- Index pour la table `type_utilisateur`
---
-ALTER TABLE `type_utilisateur`
-  ADD PRIMARY KEY (`id_type_utilisateur`);
-
---
 -- Index pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
@@ -267,12 +250,6 @@ ALTER TABLE `utilisateurs`
 --
 ALTER TABLE `salles`
   MODIFY `id_salle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT pour la table `type_utilisateur`
---
-ALTER TABLE `type_utilisateur`
-  MODIFY `id_type_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateurs`

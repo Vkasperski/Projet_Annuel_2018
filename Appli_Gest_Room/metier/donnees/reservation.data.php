@@ -75,10 +75,10 @@ class reservationData
 	}
 
 	// Ajout d'une réservation
-	public function create_reservation($id_user , $id_salle , $debut , $fin , $est_facultatif , $description)
+	public function create_reservation($id_user , $id_salle , $debut , $fin , $est_facultatif , $description, $est_invite)
 	{
-		$req = $GLOBALS["bdd"]->prepare("call createReservation(?,?,?,?,?,?)");
-		return $req->execute(array($id_user , $id_salle , $debut , $fin , $est_facultatif , $description));
+		$req = $GLOBALS["bdd"]->prepare("call createReservation(?,?,?,?,?,?,?)");
+		return $req->execute(array($id_user , $id_salle , $debut , $fin , $est_facultatif , $description, $est_invite));
 	}
 
 
@@ -104,6 +104,12 @@ class reservationData
 			$i++;	
 		}
 		return $reservations ;
+	}
+
+	public function update_reservation($id_user , $id_salle , $debut , $fin , $est_facultatif , $description, $est_invite)
+	{
+		$req = $GLOBALS["bdd"]->prepare("call createReservation(?,?,?,?,?,?,?)");
+		return $req->execute(array($id_user , $id_salle , $debut , $fin , $est_facultatif , $description, $est_invite));	
 	}
 }
 
