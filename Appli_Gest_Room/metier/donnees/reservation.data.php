@@ -108,7 +108,7 @@ class reservationData
 
 	public function update_reservation($id_user , $id_salle , $debut , $fin , $est_facultatif , $description, $est_invite)
 	{
-		$req = $GLOBALS["bdd"]->prepare("call createReservation(?,?,?,?,?,?,?)");
+		$req = $GLOBALS["bdd"]->prepare("call updateReservation(?,?,?,?,?,?,?)");
 		return $req->execute(array($id_user , $id_salle , $debut , $fin , $est_facultatif , $description, $est_invite));	
 	}
 }

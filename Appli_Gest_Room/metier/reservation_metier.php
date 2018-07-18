@@ -117,7 +117,12 @@ class reservation_metier
 			return $salleNonDispo;
 		}
 		return null;
-	}	
+	}
+
+	public function update_reservation($id_user , $id_salle , $debut , $fin , $est_facultatif , $description, $est_invite)
+	{
+		
+	}
 }
 
 
