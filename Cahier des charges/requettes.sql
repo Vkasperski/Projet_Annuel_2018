@@ -279,10 +279,10 @@ DELIMITER ;
 /*Récupère les réservations d'une salle ou d'un utilisateur à une date passé en paramettre */
 SELECT DISTINCT * 
 FROM reservations
-WHERE DATE(debut_reservation) = DATE(date_res)
-AND ( id_salle = id_salle_res 
-OR id_utilisateur = id_user );
-
+WHERE ( id_salle = id_salle_res
+OR id_utilisateur = id_utilisateur_res )
+AND (debut_reservation BETWEEN date_debut AND date_fin
+OR fin_reservation BETWEEN date_debut AND date_fin ) ;
 
 /*Récupération de tous les utilisateurs*/
 /*DELIMITER |
@@ -302,3 +302,10 @@ OR id_utilisateur = id_user );
 /*	SELECT * FROM reservations |
 /*END |
 /*DELIMITER ;
+
+
+
+
+
+
+/**/

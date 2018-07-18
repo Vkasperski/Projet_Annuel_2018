@@ -13,10 +13,11 @@ class reservation
 	private $_fin_reservation ;
 	private $_est_facultatif ;
 	private $_description ;
+	private $_est_invite ;
 
 
 	//Constructeur
-	public function __construct( $id_user, $id_salle, $debut_reservation, $fin_reservation, $facultatif, $description )
+	public function __construct( $id_user, $id_salle, $debut_reservation, $fin_reservation, $facultatif, $description, $est_invite )
 	{
 		$this->_id_utilisateur = $id_user ;
 		$this->_id_salle = $id_salle ;
@@ -24,6 +25,7 @@ class reservation
 		$this->_debut_reservation = $debut_reservation ;
 		$this->_fin_reservation = $fin_reservation ;
 		$this->_description = $description ;
+		$this->_est_invite = $est_invite ;
 	}
 
 
@@ -92,6 +94,16 @@ class reservation
 	public function set_description($description)
 	{
 		$this->_description = $description ;
+	}
+
+	public function get_est_invite()
+	{
+		return $this->_est_invite ;
+	}
+
+	public function set_est_invite($est_invite)
+	{
+		$this->_est_invite = $est_invite ;
 	}
 
 }

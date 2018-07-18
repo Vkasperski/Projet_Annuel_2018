@@ -19,7 +19,10 @@ class utilisateurData {
 				"mail_utilisateur" => $datas["mail_utilisateur"],
 				"identifiant_utilisateur" => $datas["identifiant_utilisateur"],
 				"mdp_utilisateur" => $datas["mdp_utilisateur"],
-				"id_type_utilisateur" => $datas["id_type_utilisateur"]
+				"type_utilisateur" => $datas["type_utilisateur"],
+				"est_admin" => $datas["est_admin"],
+				"est_pdg" => $datas["est_pdg"],
+				"est_bloque" => $datas["est_bloque"]
 			);
 			$i++ ;
 		}
@@ -39,7 +42,10 @@ class utilisateurData {
 			"mail_utilisateur" => $data["mail_utilisateur"],
 			"identifiant_utilisateur" => $data["identifiant_utilisateur"],
 			"mdp_utilisateur" => $data["mdp_utilisateur"],
-			"id_type_utilisateur" => $data["id_type_utilisateur"]
+			"type_utilisateur" => $data["type_utilisateur"],
+			"est_admin" => $datas["est_admin"],
+			"est_pdg" => $datas["est_pdg"],
+			"est_bloque" => $datas["est_bloque"]
 		) ;
 		return $user;
 	}
@@ -58,7 +64,10 @@ class utilisateurData {
 			"mail_utilisateur" => $data["mail_utilisateur"],
 			"identifiant_utilisateur" => $data["identifiant_utilisateur"],
 			"mdp_utilisateur" => $data["mdp_utilisateur"],
-			"id_type_utilisateur" => $data["id_type_utilisateur"]
+			"type_utilisateur" => $data["type_utilisateur"],
+			"est_admin" => $datas["est_admin"],
+			"est_pdg" => $datas["est_pdg"],
+			"est_bloque" => $datas["est_bloque"]
 		) ;
 		return $user;
 	}
@@ -79,7 +88,10 @@ class utilisateurData {
 				"mail_utilisateur" => $datas["mail_utilisateur"],
 				"identifiant_utilisateur" => $datas["identifiant_utilisateur"],
 				"mdp_utilisateur" => $datas["mdp_utilisateur"],
-				"id_type_utilisateur" => $datas["id_type_utilisateur"]
+				"type_utilisateur" => $datas["type_utilisateur"],
+				"est_admin" => $datas["est_admin"],
+				"est_pdg" => $datas["est_pdg"],
+				"est_bloque" => $datas["est_bloque"]
 			);
 			$i++ ;
 		}

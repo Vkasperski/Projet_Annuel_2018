@@ -18,7 +18,10 @@ class utilisateur_metier
 				$unUser["mail_utilisateur"],
 				$unUser["identifiant_utilisateur"],
 				$unUser["mdp_utilisateur"],
-				$unUser["id_type_utilisateur"]
+				$unUser["type_utilisateur"],
+				$unUser["est_admin"],
+				$unUser["est_pdg"],
+				$unUser["est_bloque"]
 			) ;
 			$i++;
 		}
@@ -36,7 +39,10 @@ class utilisateur_metier
 			$userArray["mail_utilisateur"],
 			$userArray["identifiant_utilisateur"],
 			$userArray["mdp_utilisateur"],
-			$userArray["id_type_utilisateur"]
+			$userArray["type_utilisateur"],
+			$userArray["est_admin"],
+			$userArray["est_pdg"],
+			$userArray["est_bloque"]
 		) ;
 
 		return $user ;
@@ -53,7 +59,10 @@ class utilisateur_metier
 			$userArray["mail_utilisateur"],
 			$userArray["identifiant_utilisateur"],
 			$userArray["mdp_utilisateur"],
-			$userArray["id_type_utilisateur"]
+			$userArray["type_utilisateur"],
+			$userArray["est_admin"],
+			$userArray["est_pdg"],
+			$userArray["est_bloque"]
 		) ;
 
 		return $user ;
@@ -72,7 +81,10 @@ class utilisateur_metier
 				$unUser["mail_utilisateur"],
 				$unUser["identifiant_utilisateur"],
 				$unUser["mdp_utilisateur"],
-				$unUser["id_type_utilisateur"]
+				$unUser["type_utilisateur"],
+				$unUser["est_admin"],
+				$unUser["est_pdg"],
+				$unUser["est_bloque"]
 			) ;
 			$i++;
 		}
@@ -100,16 +112,3 @@ class utilisateur_metier
 
 
 ?>
-
-
-logiciel SaaS couvrant de bout en bout les activités de sourcing, Contract & Service Delivery Management des DSI & Directions Digitales
-
-
-Veille & Intelligence économique
-Gestion stratégique de projets IT
-Gestion d’appels d’offres
-Négociation contractuelle
-Gestion avancée des actifs contractuels
-Pilotage Budgétaire
-Service Delivery Management
-Service Owner Management

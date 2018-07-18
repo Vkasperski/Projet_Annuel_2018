@@ -19,7 +19,8 @@ class reservationData
 				"debut_reservation" => $datas["debut_reservation"],
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],
-				"description" => $datas["description"]
+				"description" => $datas["description"],
+				"est_invite" => $data["est_invite"]
 			);
 			$i++;		
 		}
@@ -41,7 +42,8 @@ class reservationData
 				"debut_reservation" => $datas["debut_reservation"],
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],
-				"description" => $datas["description"]
+				"description" => $datas["description"],
+				"est_invite" => $data["est_invite"]
 			);
 			$i++;		
 		}
@@ -64,7 +66,8 @@ class reservationData
 				"debut_reservation" => $datas["debut_reservation"],
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],
-				"description" => $datas["description"]
+				"description" => $datas["description"],
+				"est_invite" => $data["est_invite"]
 			);
 			$i++;		
 		}
@@ -76,6 +79,31 @@ class reservationData
 	{
 		$req = $GLOBALS["bdd"]->prepare("call createReservation(?,?,?,?,?,?)");
 		return $req->execute(array($id_user , $id_salle , $debut , $fin , $est_facultatif , $description));
+	}
+
+
+
+	public function verif_possibilite_reservation($id_user, $id_salle, $debut_reservation, $fin_reservation)
+	{
+		$req = $GLOBALS["bdd"]->prepare("call getReservationsExistant(?,?,?,?)");
+		$req->execute(array($id_user, $id_salle, $debut_reservation, $fin_reservation));
+		$reservations = array();
+		$i = 0;
+		while ( $datas = $req->fetch())
+		{
+			$reservations[$i] = array
+			(
+				"id_utilisateur" => $datas["id_utilisateur"],
+				"id_salle" => $datas["id_salle"],
+				"debut_reservation" => $datas["debut_reservation"],
+				"fin_reservation" => $datas["fin_reservation"],
+				"est_facultatif" => $datas["est_facultatif"],
+				"description" => $datas["description"],
+				"est_invite" => $datas["est_invite"]
+			);
+			$i++;	
+		}
+		return $reservations ;
 	}
 }
 

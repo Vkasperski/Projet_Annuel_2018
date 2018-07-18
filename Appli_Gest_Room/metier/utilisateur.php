@@ -12,11 +12,14 @@ class utilisateur
 	private $_mail_utilisateur ;
 	private $_identifiant_utilisateur ;
 	private $_mdp_utilisateur ;
-	private $_id_type_utilisateur ;
+	private $_type_utilisateur ;
+	private $_est_admin ;
+	private $_est_pdg ;
+	private $_est_bloque ;
 
 
 	// Constructeur
-	public function __construct($id, $nom, $prenom, $mail, $identifiant, $mdp, $type)
+	public function __construct($id, $nom, $prenom, $mail, $identifiant, $mdp, $type, $admin, $pdg, $bloque)
 	{
 		$this->_id_utilisateur = $id ;
 		$this->_nom_utilisateur = $nom ;
@@ -24,7 +27,10 @@ class utilisateur
 		$this->_mail_utilisateur = $mail ; 
 		$this->_identifiant_utilisateur = $identifiant ;
 		$this->_mdp_utilisateur = $mdp ;
-		$this->_id_type_utilisateur = $type ;
+		$this->_type_utilisateur = $type ;
+		$this->_est_admin = $admin ;
+		$this->_est_pdg = $pdg ;
+		$this->_est_bloque = $bloque;
 	}
 
 
@@ -91,14 +97,44 @@ class utilisateur
 	}
 
 
-	public function get_id_type_utilisateur()
+	public function get_type_utilisateur()
 	{
-		return $this->_id_type_utilisateur ;
+		return $this->_type_utilisateur ;
 	}
 	
-	public function set_id_type_utilisateur($id_type)
+	public function set_type_utilisateur($id_type)
 	{
-		$this->_id_type_utilisateur = $id_type ;
+		$this->_type_utilisateur = $id_type ;
+	}
+
+	public function get_est_admin()
+	{
+		return $this->_est_admin ;
+	}
+
+	public function set_est_admin($admin)
+	{
+		$this->_est_admin = $admin ;
+	}
+
+	public function get_est_pdg()
+	{
+		return $this->_est_pdg ;
+	}
+
+	public function set_est_pdg($pdg)
+	{
+		$this->_est_pdg = $pdg ;
+	}
+
+	public function get_est_bloque()
+	{
+		return $this->_est_bloque ;
+	}
+
+	public function set_est_bloque($bloque)
+	{
+		$this->_est_bloque = $bloque ;
 	}
 }
 

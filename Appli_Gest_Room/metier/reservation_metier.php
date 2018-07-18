@@ -22,7 +22,8 @@ class reservation_metier
 				$uneRes["debut_reservation"],
 				$uneRes["fin_reservation"],
 				$uneRes["est_facultatif"],
-				$uneRes["description"]
+				$uneRes["description"],
+				$uneRes["est_invite"]
 			) ;
 			$i++;
 		}
@@ -43,7 +44,8 @@ class reservation_metier
 				$uneRes["debut_reservation"],
 				$uneRes["fin_reservation"],
 				$uneRes["est_facultatif"],
-				$uneRes["description"]
+				$uneRes["description"],
+				$uneRes["est_invite"]
 			) ;
 			$i++;
 		}
@@ -64,7 +66,8 @@ class reservation_metier
 				$uneRes["debut_reservation"],
 				$uneRes["fin_reservation"],
 				$uneRes["est_facultatif"],
-				$uneRes["description"]
+				$uneRes["description"],
+				$uneRes["est_invite"]
 			) ;
 			$i++;
 		}
@@ -76,12 +79,50 @@ class reservation_metier
 	{
 		$resData = new reservationData() ;
 		return $resData->create_reservation($id_user , $id_salle , $debut , $fin , $est_facultatif , $description);
+	}
+
+
+
+	//Vérification de la disponibilité d'une réservation selon la salle et l'utilisateur
+	public function verif_possibilite_reservation($id_user, $id_salle, $debut_reservation, $fin_reservation)
+	{
+		$resData = new reservationData() ;
+		$getResData = $resData->verif_possibilite_reservation($id_user, $id_salle, $debut_reservation, $fin_reservation) ;
+		if(sizeof($getResData)>0)
+		{
+			$i = 0 ;
+			$salleNonDispo = null;
+			$tab_res[0] = null;
+			foreach ($getResData as $uneRes) 
+			{
+				$tab_res[$i] = new reservation(
+					$uneRes["id_utilisateur"],
+					$uneRes["id_salle"],
+					$uneRes["debut_reservation"],
+					$uneRes["fin_reservation"],
+					$uneRes["est_facultatif"],
+					$uneRes["description"],
+					$uneRes["est_invite"]
+				) ;
+				if($uneRes["id_salle"] == $id_salle)
+				{
+					$salleNonDispo = "Cette salle est déjà réservée pour ce créneau horraire.";
+				}
+				if($uneRes["id_utilisateur"] == $id_user)
+				{
+					return "Vous avez déjà une réservation pour ce créneau horraire.";
+				}
+				$i++;
+			}
+			return $salleNonDispo;
+		}
+		return null;
 	}	
 }
 
 
 $resM = new reservation_metier();
-echo($resM->create_reservation(1,1,"2018-07-13 08:00:00","2018-07-13 10:00:00",0,"new test creation"));
+echo($resM->verif_possibilite_reservation(1,1,"2018-04-01 10:00:00","2018-04-01 11:00:00"));
 
 //for($i = 1; $i<=9;$i++)
 //{
