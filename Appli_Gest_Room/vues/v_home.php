@@ -1,4 +1,16 @@
+<?php
+  if(Date('D')=="Mon"){
+    $dateLundi = Date('Y-m-d');
+  }else{
+    $dateLundi = Date('Y-m-d',strtotime("last Monday"));
+  }
 
+  if(Date('D')=="Fri"){
+    $dateVendredi = Date('Y-m-d');
+  }else{
+    $dateVendredi = Date('Y-m-d',strtotime("next Friday"));
+  }
+?>
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
