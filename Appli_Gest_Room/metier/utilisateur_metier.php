@@ -48,10 +48,10 @@ class utilisateur_metier
 		return $user ;
 	}
 
-	public function get_utilisateur_by_connection( $identifiant, $mdp )
+	public function get_utilisateur_by_mail( $identifiant )
 	{
 		$userData = new utilisateurData() ;
-		$userArray = $userData->get_utilisateur_by_connection( $identifiant, $mdp ) ;
+		$userArray = $userData->get_utilisateur_by_mail( $identifiant ) ;
 		$user = new utilisateur(
 			$userArray["id_utilisateur"],
 			$userArray["nom_utilisateur"],
@@ -91,16 +91,16 @@ class utilisateur_metier
 		return $tab_users ;
 	}
 
-	public function create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser)
+	public function create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser, $est_admin, $est_pdg, $est_bloque)
 	{
 		$userData = new utilisateurData() ;
-		return $userData->create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser);
+		return $userData->create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser, $est_admin, $est_pdg, $est_bloque);
 	}
 
-	public function update_user($id, $nom , $prenom , $mail , $identifiant , $mdp , $typeUser)
+	public function update_user($id, $nom , $prenom , $mail  , $mdp , $typeUser, $est_admin, $est_pdg, $est_bloque)
 	{
 		$userData = new utilisateurData() ;
-		return $userData->update_user($id, $nom , $prenom , $mail , $identifiant , $mdp , $typeUser);
+		return $userData->update_user($id, $nom , $prenom , $mail  , $mdp , $typeUser, $est_admin, $est_pdg, $est_bloque);
 	}
 
 	public function delete_user($id)
@@ -109,6 +109,5 @@ class utilisateur_metier
 		$userData->delete_user($id);
 	}
 }
-
 
 ?>

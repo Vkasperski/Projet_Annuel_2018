@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le :  mer. 18 juil. 2018 à 16:49
--- Version du serveur :  10.1.26-MariaDB
--- Version de PHP :  7.1.9
+-- Client :  127.0.0.1
+-- Généré le :  Lun 23 Juillet 2018 à 07:59
+-- Version du serveur :  10.1.21-MariaDB
+-- Version de PHP :  5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -21,9 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `salles_de_reunion`
 --
-create database `salles_de_renion`;
-use `salles_de_renion`;
-
 
 DELIMITER $$
 --
@@ -104,11 +99,10 @@ SELECT *
 FROM utilisateurs
 WHERE id_utilisateur = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getUserByIdentification` (IN `identifiant` VARCHAR(100), IN `mdp` VARCHAR(100))  READS SQL DATA
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getUserByMail` (IN `mail` VARCHAR(200))  READS SQL DATA
 SELECT *
 FROM utilisateurs
-WHERE identifiant_utilisateur = identifiant
-AND mdp_utilisateur = mdp$$
+WHERE mail_utilisateur = mail$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getUsers` ()  READS SQL DATA
 SELECT * FROM utilisateurs$$
@@ -124,14 +118,13 @@ SET nom_salle = nom,
 	disponibilite_salle = disponibilite 
 WHERE id_salle = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUser` (IN `id_user` INT(11), IN `nom` VARCHAR(100), IN `prenom` VARCHAR(100), IN `mail` VARCHAR(200), IN `identifiant` VARCHAR(100), IN `mdp` VARCHAR(100), IN `typeUser` INT(11), IN `admin` BOOLEAN, IN `pdg` BOOLEAN, IN `bloque` INT(1))  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUser` (IN `id_user` INT(11), IN `nom` VARCHAR(100), IN `prenom` VARCHAR(100), IN `mail` VARCHAR(200), IN `mdp` VARCHAR(100), IN `typeUser` VARCHAR(20), IN `admin` BOOLEAN, IN `pdg` BOOLEAN, IN `bloque` INT(1))  NO SQL
 UPDATE utilisateurs 
 SET nom_utilisateur = nom, 
 	prenom_utilisateur = prenom, 
 	mail_utilisateur = mail, 
-    identifiant_utilisateur = identifiant, 
 	mdp_utilisateur = mdp, 
-	id_type_utilisateur = typeUser,
+	type_utilisateur = typeUser,
     est_admin = admin,
     est_pdg = pdg,
     est_bloque = bloque
@@ -156,7 +149,7 @@ CREATE TABLE `reservations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `reservations`
+-- Contenu de la table `reservations`
 --
 
 INSERT INTO `reservations` (`debut_reservation`, `fin_reservation`, `est_facultatif`, `description`, `id_utilisateur`, `id_salle`, `est_invite`) VALUES
@@ -174,23 +167,24 @@ INSERT INTO `reservations` (`debut_reservation`, `fin_reservation`, `est_faculta
 CREATE TABLE `salles` (
   `id_salle` int(11) NOT NULL,
   `nom_salle` varchar(100) DEFAULT NULL,
-  `disponibilite_salle` tinyint(1) DEFAULT NULL
+  `disponibilite_salle` tinyint(1) DEFAULT NULL,
+  `description_salle` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `salles`
+-- Contenu de la table `salles`
 --
 
-INSERT INTO `salles` (`id_salle`, `nom_salle`, `disponibilite_salle`) VALUES
-(1, 'salle 1', 1),
-(2, 'salle 2', 1),
-(3, 'salle 3', 1),
-(4, 'salle 4', 0),
-(5, 'salle 5', 1),
-(6, 'salle 6', 0),
-(7, 'salle 7', 1),
-(8, 'salle 8', 1),
-(9, 'salle 9', 0);
+INSERT INTO `salles` (`id_salle`, `nom_salle`, `disponibilite_salle`, `description_salle`) VALUES
+(1, 'salle 1', 1, NULL),
+(2, 'salle 2', 1, NULL),
+(3, 'salle 3', 1, NULL),
+(4, 'salle 4', 0, NULL),
+(5, 'salle 5', 1, NULL),
+(6, 'salle 6', 0, NULL),
+(7, 'salle 7', 1, NULL),
+(8, 'salle 8', 1, NULL),
+(9, 'salle 9', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -212,7 +206,7 @@ CREATE TABLE `utilisateurs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `utilisateurs`
+-- Contenu de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`id_utilisateur`, `nom_utilisateur`, `prenom_utilisateur`, `mail_utilisateur`, `identifiant_utilisateur`, `mdp_utilisateur`, `type_utilisateur`, `est_admin`, `est_pdg`, `est_bloque`) VALUES
@@ -222,7 +216,7 @@ INSERT INTO `utilisateurs` (`id_utilisateur`, `nom_utilisateur`, `prenom_utilisa
 (4, 'GUERAR', 'Frank', 'fgu@gmail.com', 'fgu', 'fgu', 'Collaborateur', 0, 0, 0);
 
 --
--- Index pour les tables déchargées
+-- Index pour les tables exportées
 --
 
 --
@@ -245,7 +239,7 @@ ALTER TABLE `utilisateurs`
   ADD PRIMARY KEY (`id_utilisateur`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
@@ -253,15 +247,13 @@ ALTER TABLE `utilisateurs`
 --
 ALTER TABLE `salles`
   MODIFY `id_salle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
   MODIFY `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
--- Contraintes pour les tables déchargées
+-- Contraintes pour les tables exportées
 --
 
 --
@@ -270,7 +262,6 @@ ALTER TABLE `utilisateurs`
 ALTER TABLE `reservations`
   ADD CONSTRAINT `FK_reservation_id_salle` FOREIGN KEY (`id_salle`) REFERENCES `salles` (`id_salle`),
   ADD CONSTRAINT `FK_reservation_id_utilisateur` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateurs` (`id_utilisateur`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

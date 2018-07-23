@@ -51,10 +51,10 @@ class utilisateurData {
 	}
 
 
-	public function get_utilisateur_by_connection( $identifiant, $mdp )
+	public function get_utilisateur_by_mail( $mail )
 	{
-		$req = $GLOBALS["bdd"]->prepare("call getUserByIdentification(?,?)");
-		$req->execute(array($identifiant,$mdp));
+		$req = $GLOBALS["bdd"]->prepare("call getUserByMail(?)");
+		$req->execute(array($mail));
 		$data = $req->fetch();
 		$user = array
 		(
@@ -65,9 +65,9 @@ class utilisateurData {
 			"identifiant_utilisateur" => $data["identifiant_utilisateur"],
 			"mdp_utilisateur" => $data["mdp_utilisateur"],
 			"type_utilisateur" => $data["type_utilisateur"],
-			"est_admin" => $datas["est_admin"],
-			"est_pdg" => $datas["est_pdg"],
-			"est_bloque" => $datas["est_bloque"]
+			"est_admin" => $data["est_admin"],
+			"est_pdg" => $data["est_pdg"],
+			"est_bloque" => $data["est_bloque"]
 		) ;
 		return $user;
 	}
@@ -98,16 +98,16 @@ class utilisateurData {
 		return $users ;
 	}
 
-	public function create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser)
+	public function create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser, $est_admin, $est_pdg, $est_bloque)
 	{
-		$req = $GLOBALS["bdd"]->prepare("call createUser(?,?,?,?,?,?)");
-		return $req->execute(array($nom , $prenom , $mail , $identifiant , $mdp , $typeUser));
+		$req = $GLOBALS["bdd"]->prepare("call createUser(?,?,?,?,?,?,?,?,?)");
+		return $req->execute(array($nom , $prenom , $mail , $identifiant , $mdp , $typeUser, $est_admin, $est_pdg, $est_bloque));
 	}
 
-	public function update_user($id, $nom , $prenom , $mail , $identifiant , $mdp , $typeUser)
+	public function update_user($id, $nom , $prenom , $mail , $mdp , $typeUser, $est_admin, $pdg, $est_bloque)
 	{
-		$req = $GLOBALS["bdd"]->prepare("call updateUser(?,?,?,?,?,?,?)");
-		return $req->execute(array($id, $nom , $prenom , $mail , $identifiant , $mdp , $typeUser));	
+		$req = $GLOBALS["bdd"]->prepare("call updateUser(?,?,?,?,?,?,?,?,?)");
+		return $req->execute(array($id, $nom, $prenom, $mail,$mdp ,$typeUser,$est_admin, $pdg, $est_bloque));	
 	}
 
 	public function delete_user($id)
@@ -116,5 +116,4 @@ class utilisateurData {
 		return $req->execute(array($id));
 	}
 }
-
 ?>
