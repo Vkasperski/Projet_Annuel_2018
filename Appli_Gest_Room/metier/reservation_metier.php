@@ -96,7 +96,7 @@ class reservation_metier
 			foreach ($getResData as $uneRes) 
 			{
 				$tab_res[$i] = new reservation(
-					$uneRes["id_utilisateur"],
+					$uneRes["id_utilisateur"],	
 					$uneRes["id_salle"],
 					$uneRes["debut_reservation"],
 					$uneRes["fin_reservation"],

@@ -10,6 +10,7 @@
   }else{
     $dateVendredi = Date('Y-m-d',strtotime("next Friday"));
   }
+  include("v_nav.php");
 ?>
   <div class="content-wrapper">
     <div class="container-fluid">
