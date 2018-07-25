@@ -16,9 +16,7 @@ class utilisateur_metier
 				$unUser["nom_utilisateur"],
 				$unUser["prenom_utilisateur"],
 				$unUser["mail_utilisateur"],
-				$unUser["identifiant_utilisateur"],
 				$unUser["mdp_utilisateur"],
-				$unUser["type_utilisateur"],
 				$unUser["est_admin"],
 				$unUser["est_pdg"],
 				$unUser["est_bloque"]
@@ -36,10 +34,8 @@ class utilisateur_metier
 			$userArray["id_utilisateur"],
 			$userArray["nom_utilisateur"],
 			$userArray["prenom_utilisateur"],
-			$userArray["mail_utilisateur"],
-			$userArray["identifiant_utilisateur"],
+			$userArray["mail_utilisateur"],		
 			$userArray["mdp_utilisateur"],
-			$userArray["type_utilisateur"],
 			$userArray["est_admin"],
 			$userArray["est_pdg"],
 			$userArray["est_bloque"]
@@ -57,9 +53,7 @@ class utilisateur_metier
 			$userArray["nom_utilisateur"],
 			$userArray["prenom_utilisateur"],
 			$userArray["mail_utilisateur"],
-			$userArray["identifiant_utilisateur"],
 			$userArray["mdp_utilisateur"],
-			$userArray["type_utilisateur"],
 			$userArray["est_admin"],
 			$userArray["est_pdg"],
 			$userArray["est_bloque"]
@@ -79,9 +73,7 @@ class utilisateur_metier
 				$unUser["nom_utilisateur"],
 				$unUser["prenom_utilisateur"],
 				$unUser["mail_utilisateur"],
-				$unUser["identifiant_utilisateur"],
 				$unUser["mdp_utilisateur"],
-				$unUser["type_utilisateur"],
 				$unUser["est_admin"],
 				$unUser["est_pdg"],
 				$unUser["est_bloque"]
@@ -91,16 +83,16 @@ class utilisateur_metier
 		return $tab_users ;
 	}
 
-	public function create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser, $est_admin, $est_pdg, $est_bloque)
+	public function create_user($nom , $prenom , $mail  , $mdp , $est_admin, $est_pdg, $est_bloque)
 	{
 		$userData = new utilisateurData() ;
-		return $userData->create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser, $est_admin, $est_pdg, $est_bloque);
+		return $userData->create_user($nom , $prenom , $mail  , $mdp , $est_admin, $est_pdg, $est_bloque);
 	}
 
-	public function update_user($id, $nom , $prenom , $mail  , $mdp , $typeUser, $est_admin, $est_pdg, $est_bloque)
+	public function update_user($id, $nom , $prenom , $mail  , $mdp , $est_admin, $est_pdg, $est_bloque)
 	{
 		$userData = new utilisateurData() ;
-		return $userData->update_user($id, $nom , $prenom , $mail  , $mdp , $typeUser, $est_admin, $est_pdg, $est_bloque);
+		return $userData->update_user($id, $nom , $prenom , $mail  , $mdp , $est_admin, $est_pdg, $est_bloque);
 	}
 
 	public function delete_user($id)

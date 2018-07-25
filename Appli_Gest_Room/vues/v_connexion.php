@@ -19,7 +19,6 @@ if(isset($_POST["conect"]))
         $_SESSION["prenom"] = $user->get_prenom_utilisateur();
         $_SESSION["mail"] = $user->get_mail_utilisateur();
         $_SESSION["psw"] = $user->get_mdp_utilisateur();
-        $_SESSION["type"] = $user->get_type_utilisateur();
         $_SESSION["admin"] = $user->get_est_admin();
         $_SESSION["pdg"] = $user->get_est_pdg();
         $_SESSION["bloque"] = $user->get_est_bloque() ;
@@ -27,7 +26,7 @@ if(isset($_POST["conect"]))
     {
       if ($_SESSION["psw"] == $pwd) {
         //On remet le compteur du bloquage de compte à 0
-        $userMetier->update_user($_SESSION["id"],$_SESSION["nom"],$_SESSION["prenom"],$_SESSION["mail"],$_SESSION["psw"],$_SESSION["type"],$_SESSION["admin"],$_SESSION["pdg"],0);
+        $userMetier->update_user($_SESSION["id"],$_SESSION["nom"],$_SESSION["prenom"],$_SESSION["mail"],$_SESSION["psw"],$_SESSION["admin"],$_SESSION["pdg"],0);
 
         header('Location: vues/v_home.php');
       }else{
@@ -38,7 +37,6 @@ if(isset($_POST["conect"]))
           $_SESSION["prenom"],
           $_SESSION["mail"],
           $_SESSION["psw"],
-          $_SESSION["type"],
           $_SESSION["admin"],
           $_SESSION["pdg"],
           $_SESSION["bloque"]

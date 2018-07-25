@@ -20,7 +20,7 @@ class reservationData
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],
 				"description" => $datas["description"],
-				"est_invite" => $data["est_invite"]
+				"est_invite" => $datas["est_invite"]
 			);
 			$i++;		
 		}
@@ -43,7 +43,7 @@ class reservationData
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],
 				"description" => $datas["description"],
-				"est_invite" => $data["est_invite"]
+				"est_invite" => $datas["est_invite"]
 			);
 			$i++;		
 		}
@@ -67,9 +67,32 @@ class reservationData
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],
 				"description" => $datas["description"],
-				"est_invite" => $data["est_invite"]
+				"est_invite" => $datas["est_invite"]
 			);
 			$i++;		
+		}
+		return $reservations;
+	}
+
+	public function get_reservations_intervalle($date_debut, $date_fin)
+	{
+		$req = $GLOBALS["bdd"]->prepare("call getReservationsIntervalle(?,?)");
+		$req->execute(array($date_debut, $date_fin));
+		$reservations = array();
+		$i = 0;
+		while ( $datas = $req->fetch())
+		{
+			$reservations[$i] = array
+			(
+				"id_utilisateur" => $datas["id_utilisateur"],
+				"id_salle" => $datas["id_salle"],
+				"debut_reservation" => $datas["debut_reservation"],
+				"fin_reservation" => $datas["fin_reservation"],
+				"est_facultatif" => $datas["est_facultatif"],
+				"description" => $datas["description"],
+				"est_invite" => $datas["est_invite"]
+			);
+			$i++;
 		}
 		return $reservations;
 	}

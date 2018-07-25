@@ -1,4 +1,5 @@
 <?php
+include("../metier/reservation_metier.php");    
   if(Date('D')=="Mon"){
     $dateLundi = Date('Y-m-d');
   }else{
@@ -10,7 +11,13 @@
   }else{
     $dateVendredi = Date('Y-m-d',strtotime("next Friday"));
   }
-  include("v_nav.php");
+  $reservationMetier = new reservation_metier();
+  $reservations = $reservationMetier->get_reservations_intervalle($dateLundi, $dateVendredi);
+  foreach ($reservations as $uneReservation) 
+  {
+    echo $uneReservation->get_id_utilisateur()." || ".$uneReservation->get_id_utilisateur()."<br>";
+  }
+/*  include("v_nav.php");*/
 ?>
   <div class="content-wrapper">
     <div class="container-fluid">

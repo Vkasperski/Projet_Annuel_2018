@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 23 Juillet 2018 à 07:59
+-- Généré le :  Mer 25 Juillet 2018 à 09:16
 -- Version du serveur :  10.1.21-MariaDB
 -- Version de PHP :  5.6.30
 
@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 -- Base de données :  `salles_de_reunion`
 --
 
+CREATE database `salles_de_reunion`;
+use `salles_de_reunion`;
+
 DELIMITER $$
 --
 -- Procédures
@@ -30,8 +33,9 @@ INSERT INTO reservation ( id_utilisateur, id_salle, debut_reservation, fin_reser
 CREATE DEFINER=`root`@`localhost` PROCEDURE `createSalle` (IN `nom` VARCHAR(100), IN `disponibilite` BOOLEAN)  NO SQL
 INSERT INTO salles( nom_salle, disponibilite_salle ) VALUES ( nom, disponibilite )$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `createUser` (IN `nom` VARCHAR(100), IN `prenom` VARCHAR(100), IN `mail` VARCHAR(200), IN `identifiant` VARCHAR(100), IN `mdp` VARCHAR(100), IN `typeUser` VARCHAR(20), IN `admin` BOOLEAN, IN `pdg` BOOLEAN, IN `bloque` INT(1))  NO SQL
-INSERT INTO utilisateurs ( nom_utilisateur, prenom_utilisateur, mail_utilisateur, identifiant_utilisateur, mdp_utilisateur, id_type_utilisateur, est_admin, est_pdg, est_bloque ) VALUES ( nom, prenom, mail, identifiant, mdp, typeUser, admin, pdg, bloque )$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `createUser` (IN `nom` VARCHAR(100), IN `prenom` VARCHAR(100), IN `mail` VARCHAR(200), IN `mdp` VARCHAR(100), IN `admin` BOOLEAN, IN `pdg` BOOLEAN, IN `bloque` INT(1))  NO SQL
+INSERT INTO utilisateurs ( nom_utilisateur, prenom_utilisateur, mail_utilisateur, mdp_utilisateur,est_admin, est_pdg, est_bloque ) 
+VALUES ( nom, prenom, mail, mdp, admin, pdg, bloque )$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteSalle` (IN `id` INT(11))  MODIFIES SQL DATA
 BEGIN	
@@ -81,6 +85,17 @@ OR fin_reservation BETWEEN date_debut AND date_fin );
 
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getReservationsIntervalle` (IN `date_debut` DATETIME, IN `date_fin` DATETIME)  NO SQL
+SELECT DISTINCT *
+FROM reservations
+WHERE ( DATE(debut_reservation) BETWEEN DATE(date_debut) AND DATE(date_fin)
+AND DATE(fin_reservation) BETWEEN DATE(date_debut) AND DATE(date_fin) )
+OR DATE(date_debut) = DATE(debut_reservation)
+OR DATE(date_debut) = DATE(fin_reservation)
+OR DATE(date_fin) = DATE(debut_reservation)
+OR DATE(date_fin) = DATE(fin_reservation)
+ORDER BY debut_reservation$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getSalleById` (IN `id` INT(11))  NO SQL
 SELECT *
 FROM salles
@@ -118,13 +133,12 @@ SET nom_salle = nom,
 	disponibilite_salle = disponibilite 
 WHERE id_salle = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUser` (IN `id_user` INT(11), IN `nom` VARCHAR(100), IN `prenom` VARCHAR(100), IN `mail` VARCHAR(200), IN `mdp` VARCHAR(100), IN `typeUser` VARCHAR(20), IN `admin` BOOLEAN, IN `pdg` BOOLEAN, IN `bloque` INT(1))  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateUser` (IN `id_user` INT(11), IN `nom` VARCHAR(100), IN `prenom` VARCHAR(100), IN `mail` VARCHAR(200), IN `mdp` VARCHAR(100), IN `admin` BOOLEAN, IN `pdg` BOOLEAN, IN `bloque` INT(1))  NO SQL
 UPDATE utilisateurs 
 SET nom_utilisateur = nom, 
 	prenom_utilisateur = prenom, 
 	mail_utilisateur = mail, 
 	mdp_utilisateur = mdp, 
-	type_utilisateur = typeUser,
     est_admin = admin,
     est_pdg = pdg,
     est_bloque = bloque
@@ -153,9 +167,15 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`debut_reservation`, `fin_reservation`, `est_facultatif`, `description`, `id_utilisateur`, `id_salle`, `est_invite`) VALUES
+('2018-07-23 08:00:00', '2018-07-23 10:00:00', 0, 'test', 1, 1, 0),
 ('2018-04-01 08:00:00', '2018-04-01 10:00:00', 0, 'test', 1, 5, 0),
+('2018-07-27 10:00:00', '2018-07-27 13:00:00', 0, 'test', 1, 9, 0),
+('2018-07-23 08:00:00', '2018-07-23 11:00:00', 0, 'test', 2, 2, 0),
 ('2018-04-01 14:00:00', '2018-04-01 16:00:00', 0, 'test 2', 2, 5, 0),
+('2018-07-27 10:00:00', '2018-07-27 13:00:00', 0, 'test', 2, 8, 0),
 ('2018-04-01 08:00:00', '2018-04-01 10:00:00', 0, 'test 4', 2, 9, 0),
+('2018-07-24 10:00:00', '2018-07-24 12:00:00', 0, 'test', 3, 1, 0),
+('2018-07-23 10:00:00', '2018-07-23 12:00:00', 0, 'test', 4, 1, 0),
 ('2018-04-01 16:00:00', '2018-04-01 17:00:00', 0, 'test 3', 4, 5, 0);
 
 -- --------------------------------------------------------
@@ -197,9 +217,7 @@ CREATE TABLE `utilisateurs` (
   `nom_utilisateur` varchar(100) DEFAULT NULL,
   `prenom_utilisateur` varchar(100) DEFAULT NULL,
   `mail_utilisateur` varchar(200) DEFAULT NULL,
-  `identifiant_utilisateur` varchar(100) DEFAULT NULL,
   `mdp_utilisateur` varchar(100) DEFAULT NULL,
-  `type_utilisateur` varchar(20) DEFAULT NULL,
   `est_admin` tinyint(1) NOT NULL DEFAULT '0',
   `est_pdg` tinyint(1) NOT NULL DEFAULT '0',
   `est_bloque` int(1) NOT NULL DEFAULT '0'
@@ -209,11 +227,12 @@ CREATE TABLE `utilisateurs` (
 -- Contenu de la table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`id_utilisateur`, `nom_utilisateur`, `prenom_utilisateur`, `mail_utilisateur`, `identifiant_utilisateur`, `mdp_utilisateur`, `type_utilisateur`, `est_admin`, `est_pdg`, `est_bloque`) VALUES
-(1, 'kasperski', 'victor', 'vk@sdsd', 'vka', 'mdp', 'PDG', 1, 1, 0),
-(2, 'BLAIX', 'Camille', 'cbl@gmail.com', 'cbl', 'cbl', 'Administrateur', 1, 0, 0),
-(3, 'daurel', 'sebastien', 's.d@sdsd', 'sda', 'sda', 'Collaborateur', 0, 0, 0),
-(4, 'GUERAR', 'Frank', 'fgu@gmail.com', 'fgu', 'fgu', 'Collaborateur', 0, 0, 0);
+INSERT INTO `utilisateurs` (`id_utilisateur`, `nom_utilisateur`, `prenom_utilisateur`, `mail_utilisateur`, `mdp_utilisateur`, `est_admin`, `est_pdg`, `est_bloque`) VALUES
+(1, 'kasperski', 'victor', 'vk@sdsd', 'mdp', 1, 1, 0),
+(2, 'BLAIX', 'Camille', 'cbl@gmail.com', 'cbl', 1, 0, 0),
+(3, 'daurel', 'sebastien', 's.d@sdsd', 'sda', 0, 0, 0),
+(4, 'GUERAR', 'Frank', 'fgu@gmail.com', 'fgu', 0, 0, 0),
+(5, 'test', 'test', 'test', 'test', 0, 0, 0);
 
 --
 -- Index pour les tables exportées
@@ -223,7 +242,7 @@ INSERT INTO `utilisateurs` (`id_utilisateur`, `nom_utilisateur`, `prenom_utilisa
 -- Index pour la table `reservations`
 --
 ALTER TABLE `reservations`
-  ADD PRIMARY KEY (`id_utilisateur`,`id_salle`),
+  ADD PRIMARY KEY (`id_utilisateur`,`id_salle`,`debut_reservation`,`fin_reservation`),
   ADD KEY `FK_reservation_id_salle` (`id_salle`);
 
 --
@@ -251,7 +270,7 @@ ALTER TABLE `salles`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Contraintes pour les tables exportées
 --

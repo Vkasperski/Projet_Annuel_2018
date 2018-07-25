@@ -10,24 +10,20 @@ class utilisateur
 	private $_nom_utilisateur ;
 	private $_prenom_utilisateur ;
 	private $_mail_utilisateur ;
-	private $_identifiant_utilisateur ;
 	private $_mdp_utilisateur ;
-	private $_type_utilisateur ;
 	private $_est_admin ;
 	private $_est_pdg ;
 	private $_est_bloque ;
 
 
 	// Constructeur
-	public function __construct($id, $nom, $prenom, $mail, $identifiant, $mdp, $type, $admin, $pdg, $bloque)
+	public function __construct($id, $nom, $prenom, $mail, $mdp, $admin, $pdg, $bloque)
 	{
 		$this->_id_utilisateur = $id ;
 		$this->_nom_utilisateur = $nom ;
 		$this->_prenom_utilisateur = $prenom ;
 		$this->_mail_utilisateur = $mail ; 
-		$this->_identifiant_utilisateur = $identifiant ;
 		$this->_mdp_utilisateur = $mdp ;
-		$this->_type_utilisateur = $type ;
 		$this->_est_admin = $admin ;
 		$this->_est_pdg = $pdg ;
 		$this->_est_bloque = $bloque;
@@ -74,18 +70,6 @@ class utilisateur
 		$this->_mail_utilisateur = $mail_user ;
 	}
 	
-	
-	public function get_identifiant_utilisateur()
-	{
-		return $this->_identifiant_utilisateur ;
-	}
-	
-	public function set_ididentifiant_utilisateur($ididentifiant_user)
-	{
-		$this->_ididentifiant_utilisateur = $ididentifiant_user ;
-	}
-	
-	
 	public function get_mdp_utilisateur()
 	{
 		return $this->_mdp_utilisateur ;
@@ -94,17 +78,6 @@ class utilisateur
 	public function set_mdp_utilisateur($mdp_user)
 	{
 		$this->_mdp_utilisateur = $mdp_user ;
-	}
-
-
-	public function get_type_utilisateur()
-	{
-		return $this->_type_utilisateur ;
-	}
-	
-	public function set_type_utilisateur($id_type)
-	{
-		$this->_type_utilisateur = $id_type ;
 	}
 
 	public function get_est_admin()

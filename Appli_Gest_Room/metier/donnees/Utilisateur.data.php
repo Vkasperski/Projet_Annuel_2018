@@ -17,9 +17,7 @@ class utilisateurData {
 				"nom_utilisateur" => $datas["nom_utilisateur"],
 				"prenom_utilisateur" => $datas["prenom_utilisateur"],
 				"mail_utilisateur" => $datas["mail_utilisateur"],
-				"identifiant_utilisateur" => $datas["identifiant_utilisateur"],
 				"mdp_utilisateur" => $datas["mdp_utilisateur"],
-				"type_utilisateur" => $datas["type_utilisateur"],
 				"est_admin" => $datas["est_admin"],
 				"est_pdg" => $datas["est_pdg"],
 				"est_bloque" => $datas["est_bloque"]
@@ -40,9 +38,7 @@ class utilisateurData {
 			"nom_utilisateur" => $data["nom_utilisateur"],
 			"prenom_utilisateur" => $data["prenom_utilisateur"],
 			"mail_utilisateur" => $data["mail_utilisateur"],
-			"identifiant_utilisateur" => $data["identifiant_utilisateur"],
 			"mdp_utilisateur" => $data["mdp_utilisateur"],
-			"type_utilisateur" => $data["type_utilisateur"],
 			"est_admin" => $datas["est_admin"],
 			"est_pdg" => $datas["est_pdg"],
 			"est_bloque" => $datas["est_bloque"]
@@ -62,9 +58,7 @@ class utilisateurData {
 			"nom_utilisateur" => $data["nom_utilisateur"],
 			"prenom_utilisateur" => $data["prenom_utilisateur"],
 			"mail_utilisateur" => $data["mail_utilisateur"],
-			"identifiant_utilisateur" => $data["identifiant_utilisateur"],
 			"mdp_utilisateur" => $data["mdp_utilisateur"],
-			"type_utilisateur" => $data["type_utilisateur"],
 			"est_admin" => $data["est_admin"],
 			"est_pdg" => $data["est_pdg"],
 			"est_bloque" => $data["est_bloque"]
@@ -86,9 +80,7 @@ class utilisateurData {
 				"nom_utilisateur" => $datas["nom_utilisateur"],
 				"prenom_utilisateur" => $datas["prenom_utilisateur"],
 				"mail_utilisateur" => $datas["mail_utilisateur"],
-				"identifiant_utilisateur" => $datas["identifiant_utilisateur"],
 				"mdp_utilisateur" => $datas["mdp_utilisateur"],
-				"type_utilisateur" => $datas["type_utilisateur"],
 				"est_admin" => $datas["est_admin"],
 				"est_pdg" => $datas["est_pdg"],
 				"est_bloque" => $datas["est_bloque"]
@@ -98,16 +90,16 @@ class utilisateurData {
 		return $users ;
 	}
 
-	public function create_user($nom , $prenom , $mail , $identifiant , $mdp , $typeUser, $est_admin, $est_pdg, $est_bloque)
+	public function create_user($nom , $prenom , $mail , $mdp , $est_admin, $est_pdg, $est_bloque)
 	{
-		$req = $GLOBALS["bdd"]->prepare("call createUser(?,?,?,?,?,?,?,?,?)");
-		return $req->execute(array($nom , $prenom , $mail , $identifiant , $mdp , $typeUser, $est_admin, $est_pdg, $est_bloque));
+		$req = $GLOBALS["bdd"]->prepare("call createUser(?,?,?,?,?,?,?)");
+		return $req->execute(array($nom , $prenom , $mail , $mdp , $est_admin, $est_pdg, $est_bloque));
 	}
 
-	public function update_user($id, $nom , $prenom , $mail , $mdp , $typeUser, $est_admin, $pdg, $est_bloque)
+	public function update_user($id, $nom , $prenom , $mail , $mdp , $est_admin, $pdg, $est_bloque)
 	{
-		$req = $GLOBALS["bdd"]->prepare("call updateUser(?,?,?,?,?,?,?,?,?)");
-		return $req->execute(array($id, $nom, $prenom, $mail,$mdp ,$typeUser,$est_admin, $pdg, $est_bloque));	
+		$req = $GLOBALS["bdd"]->prepare("call updateUser(?,?,?,?,?,?,?,?)");
+		return $req->execute(array($id, $nom, $prenom, $mail, $mdp, $est_admin, $pdg, $est_bloque));	
 	}
 
 	public function delete_user($id)
