@@ -1,5 +1,7 @@
 <?php
-include("../metier/reservation_metier.php");    
+include("../metier/reservation_metier.php");
+include("../metier/header.php");
+include("../metier/salle_metier.php");
   if(Date('D')=="Mon"){
     $dateLundi = Date('Y-m-d');
   }else{
@@ -12,11 +14,18 @@ include("../metier/reservation_metier.php");
     $dateVendredi = Date('Y-m-d',strtotime("next Friday"));
   }
   $reservationMetier = new reservation_metier();
-  $reservations = $reservationMetier->get_reservations_intervalle($dateLundi, $dateVendredi);
-  foreach ($reservations as $uneReservation) 
+  $reservations = $reservationMetier->get_reservations_by_id_utilisateur($_SESSION["id"]);
+  $i=0;
+  foreach($reservations as $uneReservation) 
   {
-    echo $uneReservation->get_id_utilisateur()." || ".$uneReservation->get_id_utilisateur()."<br>";
+    echo($uneReservation->get_fin_reservation()."<BR>");
+    if(Date('d-m-Y',strtotime($uneReservation->get_fin_reservation())) < DATE('d-m-Y',strtotime($dateLundi))) 
+    {
+      array_shift($reservations[$i]);  
+    }
+
   }
+  
 /*  include("v_nav.php");*/
 ?>
   <div class="content-wrapper">
@@ -112,7 +121,14 @@ include("../metier/reservation_metier.php");
          <tbody>
           <tr>
             <td>8h00</td>
-            <td>Aucune réservation</td>
+            <td>
+              <?php
+                $salleMetier = new salle_metier();
+                $utilisateurMetier = new utilisateur_metier(); 
+                $countResa = 0 ;
+                
+              ?>
+            </td>
             <td>Aucune réservation</td>
             <td>Réserver par Xavier DURAND<br>Salle LOKI</td>
             <td>Aucune réservation</td>

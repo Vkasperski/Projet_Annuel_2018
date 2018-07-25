@@ -39,9 +39,9 @@ class utilisateurData {
 			"prenom_utilisateur" => $data["prenom_utilisateur"],
 			"mail_utilisateur" => $data["mail_utilisateur"],
 			"mdp_utilisateur" => $data["mdp_utilisateur"],
-			"est_admin" => $datas["est_admin"],
-			"est_pdg" => $datas["est_pdg"],
-			"est_bloque" => $datas["est_bloque"]
+			"est_admin" => $data["est_admin"],
+			"est_pdg" => $data["est_pdg"],
+			"est_bloque" => $data["est_bloque"]
 		) ;
 		return $user;
 	}

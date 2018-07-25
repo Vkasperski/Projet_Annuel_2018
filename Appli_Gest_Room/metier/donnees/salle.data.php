@@ -33,7 +33,7 @@ class salleData
 			"id_salle" => $data["id_salle"],
 			"nom_salle" => $data["nom_salle"],
 			"disponibilite_salle" => $data["disponibilite_salle"],
-			"descriptif_salle" => $datas["descriptif_salle"]
+			"description_salle" => $data["description_salle"]
 		);
 		return $salle ;
 	}
@@ -51,7 +51,7 @@ class salleData
 				"id_salle" => $datas["id_salle"],
 				"nom_salle" => $datas["nom_salle"],
 				"disponibilite_salle" => $datas["disponibilite_salle"],
-				"descriptif_salle" => $datas["descriptif_salle"]
+				"description_salle" => $datas["description_salle"]
 			);
 			$i++;
 		}

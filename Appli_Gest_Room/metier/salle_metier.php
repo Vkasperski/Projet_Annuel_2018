@@ -32,7 +32,7 @@ class salle_metier
 			$salleArray["id_salle"],
 			$salleArray["nom_salle"],
 			$salleArray["disponibilite_salle"],
-			$salleArray["descriptif_salle"]
+			$salleArray["description_salle"]
 		);
 		return $salle ;
 	}
@@ -55,16 +55,16 @@ class salle_metier
 		return $tab_salles ;
 	}
 
-	public function create_salle($nom, $disponibilite)
+	public function create_salle($nom, $disponibilite,$descriptif)
 	{
 		$salleData = new salleData();
-		return $salleData->create_salle($nom,$disponibilite);
+		return $salleData->create_salle($nom,$disponibilite,$descriptif);
 	}
 
-	public function update_salle($id, $nom, $disponibilite)
+	public function update_salle($id, $nom, $disponibilite,$descriptif)
 	{
 		$salleData = new salleData();
-		return $salleData->update_salle($id, $nom, $disponibilite);
+		return $salleData->update_salle($id, $nom, $disponibilite,$descriptif);
 	}
 
 	public function delete_salle($id)
@@ -72,14 +72,6 @@ class salle_metier
 		$salleData = new salleData();
 		return $salleData->delete_salle($id);
 	}
-}
-
-$salleM = new salle_metier();
-$salleM->update_salle(1,"salle 1", true); 
-$salles = $salleM->get_salles();
-foreach ($salles as $uneSalle) 
-{
-	echo($uneSalle->get_id_salle()." | ".$uneSalle->get_nom_salle()." | ".$uneSalle->get_disponibilite_salle()); ?></br><?php
 }
 
 ?>

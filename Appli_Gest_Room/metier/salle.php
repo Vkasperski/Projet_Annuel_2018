@@ -13,11 +13,12 @@ class salle
 
 
 	// Constructeur
-	public function __construct($id, $nom, $disponibilite)
+	public function __construct($id, $nom, $disponibilite, $descriptif)
 	{
 		$this->_id_salle = $id ;
 		$this->_nom_salle = $nom ;
 		$this->_disponibilite_salle = $disponibilite ;
+		$this->_descriptif_salle = $descriptif ;
 	}
 
 
