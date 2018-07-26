@@ -14,18 +14,11 @@ include("../metier/salle_metier.php");
     $dateVendredi = Date('Y-m-d',strtotime("next Friday"));
   }
   $reservationMetier = new reservation_metier();
-  $reservations = $reservationMetier->get_reservations_by_id_utilisateur($_SESSION["id"]);
-  $i=0;
-  foreach($reservations as $uneReservation) 
-  {
-    echo($uneReservation->get_fin_reservation()."<BR>");
-    if(Date('d-m-Y',strtotime($uneReservation->get_fin_reservation())) < DATE('d-m-Y',strtotime($dateLundi))) 
-    {
-      array_shift($reservations[$i]);  
-    }
 
-  }
+  $salleMetier = new salle_metier();
+
   
+
 /*  include("v_nav.php");*/
 ?>
   <div class="content-wrapper">
@@ -122,49 +115,533 @@ include("../metier/salle_metier.php");
           <tr>
             <td>8h00</td>
             <td>
-              <?php
-                $salleMetier = new salle_metier();
-                $utilisateurMetier = new utilisateur_metier(); 
-                $countResa = 0 ;
-                
+              <?php 
+              echo $dateLundi;
+                $var = date('Y-m-d H:m:s',strtotime($dateLundi." 08:00:00" ));
+                echo $var;
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s',strtotime($dateLundi)),date('Y-m-d H:m:s',strtotime($dateLundi." 09:00:00")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
               ?>
             </td>
-            <td>Aucune réservation</td>
-            <td>Réserver par Xavier DURAND<br>Salle LOKI</td>
-            <td>Aucune réservation</td>
-            <td>Aucune réservation</td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +1 day'." 08:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +1 day'." 09:00:00")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>  
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"], date('Y-m-d H:m:s', strtotime($dateLundi . ' +2 day'." 08:00:00")), $dateLundi.' +2 day'." 09:00:00");
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +3 day'." 08:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +3 day'." 09:00:00")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +4 day'." 08:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +4 day'." 09:00:00")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
           </tr>   
           <tr class="danger">
             <td>9h00</td>
-            <td>Réserver par Xavier DURAND<br>Salle LOKI</td>
-            <td>Aucune réservation</td>
-            <td>Aucune réservation</td>
-            <td>Aucune réservation</td>
-            <td>Réserver par Xavier DURAND<br>Salle LOKI</td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s',strtotime($dateLundi." 09:00:00")),strtotime($dateLundi." 10:00:00"));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +1 day'." 09:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +1 day'." 10:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>  
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +2 day'." 09:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +2 day'." 10:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +3 day'." 09:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +3 day'." 10:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +4 day'." 09:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +4 day'." 10:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
           </tr>
           <tr class="info">
             <td>10h00</td>
-            <td>Aucune réservation</td>
-            <td>Réserver par Xavier DURAND<br>Salle LOKI</td>
-            <td>Aucune réservation</td>
-            <td>Réserver par Xavier DURAND<br>Salle LOKI</td>
-            <td>Aucune réservation</td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s',strtotime($dateLundi." 10:00:00")),strtotime($dateLundi." 11:00:00"));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +1 day'." 10:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +1 day'." 11:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>  
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +2 day'." 10:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +2 day'." 11:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +3 day'." 10:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +3 day'." 11:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +4 day'." 10:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +4 day'." 11:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
           </tr>
           <tr class="warning">
             <td>11h00</td>
-            <td>Aucune réservation</td>
-            <td>Aucune réservation</td>
-            <td>Réserver par Xavier DURAND<br>Salle LOKI</td>
-            <td>Aucune réservation</td>
-            <td>Aucune réservation</td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s',strtotime($dateLundi." 11:00:00")),strtotime($dateLundi." 12:00:00"));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +1 day'." 11:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +1 day'." 12:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>  
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +2 day'." 11:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +2 day'." 12:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +3 day'." 11:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +3 day'." 12:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +4 day'." 11:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +4 day'." 12:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
           </tr>
           <tr class="active">
             <td>12h00</td>
-            <td>Aucune réservation</td>
-            <td>Réserver par Xavier DURAND<br>Salle LOKI</td>
-            <td>Aucune réservation</td>
-            <td>Réserver par Xavier DURAND<br>Salle LOKI</td>
-            <td>Réserver par Xavier DURAND<br>Salle LOKI</td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s',strtotime($dateLundi." 12:00:00")),strtotime($dateLundi." 13:00:00"));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +1 day'." 12:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +1 day'." 13:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>  
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +2 day'." 12:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +2 day'." 13:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +3 day'." 12:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +3 day'." 13:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +4 day'." 12:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +4 day'." 13:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+          </tr>
+          <tr class="active">
+            <td>13h00</td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s',strtotime($dateLundi." 13:00:00")),strtotime($dateLundi." 14:00:00"));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +1 day'." 14:00:00 ")),date('Y-m-d H:m:s',strtotime($dateLundi.' +1 day'." 14:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>  
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +2 day'." 14:00:00 ")),date('Y-m-d H:m:s',strtotime($dateLundi.' +2 day'." 14:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +3 day'." 14:00:00 ")),date('Y-m-d H:m:s',strtotime($dateLundi.' +3 day'." 14:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +4 day'." 14:00:00 ")),date('Y-m-d H:m:s',strtotime($dateLundi.' +4 day'." 14:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+          </tr>
+          <tr class="active">
+            <td>14h00</td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s',strtotime($dateLundi." 14:00:00")),strtotime($dateLundi." 15:00:00"));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +1 day'." 14:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +1 day'." 15:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>  
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +2 day'." 14:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +2 day'." 15:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +3 day'." 14:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +3 day'." 15:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +4 day'." 14:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +4 day'." 15:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+          </tr>
+          <tr class="active">
+            <td>15h00</td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s',strtotime($dateLundi." 15:00:00")),strtotime($dateLundi." 16:00:00"));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +1 day'." 15:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +1 day'." 16:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>  
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +2 day'." 15:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +2 day'." 16:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +3 day'." 15:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +3 day'." 16:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +4 day'." 15:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +4 day'." 16:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+          </tr>
+          <tr class="active">
+            <td>16h00</td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s',strtotime($dateLundi." 16:00:00")),strtotime($dateLundi." 17:00:00"));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +1 day'." 16:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +1 day'." 17:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>  
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +2 day'." 16:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +2 day'." 17:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +3 day'." 16:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +3 day'." 17:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +4 day'." 16:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +4 day'." 17:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+          </tr>
+          <tr class="active">
+            <td>17h00</td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s',strtotime($dateLundi." 17:00:00")),strtotime($dateLundi." 18:00:00"));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +1 day'." 17:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +1 day'." 18:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>  
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +2 day'." 17:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +2 day'." 18:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +3 day'." 17:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +3 day'." 18:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +4 day'." 17:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +4 day'." 18:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+          </tr>
+          <tr class="active">
+            <td>18h00</td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s',strtotime($dateLundi." 18:00:00")),strtotime($dateLundi." 19:00:00"));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +1 day'." 18:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +. day'." 19:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>  
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +2 day'." 18:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +2 day'." 19:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +3 day'." 18:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +3 day'." 19:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
+            <td>
+              <?php
+                $resa = $reservationMetier->get_reservations_intervalle_by_id_utilisateur($_SESSION["id"],date('Y-m-d H:m:s', strtotime($dateLundi . ' +4 day'." 18:00:00")),date('Y-m-d H:m:s',strtotime($dateLundi.' +4 day'." 19:00:00 ")));
+                if(current($resa) != null)
+                  echo ($salleMetier->get_salle_by_id( current( $resa )->get_id_salle() ))->get_nom_salle() ;
+                else
+                  echo "Aucune réservation";
+              ?>
+            </td>
           </tr>
         </tbody>
       </table>

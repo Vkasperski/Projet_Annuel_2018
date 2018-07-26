@@ -1,3 +1,15 @@
+<?php
+include("../metier/reservation_metier.php");
+include("../metier/header.php");
+include("../metier/utilisateur_metier.php");
+
+$reservationMetier = new reservation_metier();
+
+$utilisateurMetier = new utilisateur_metier();
+
+//$reservations = $reservationMetier->get_reservations_by_id_utilisateur($_SESSION["id"]);
+$reservations = $reservationMetier->get_reservations_by_id_utilisateur(1);
+?>
  <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
@@ -76,13 +88,38 @@
       </div>-->
 
       <!-- Planning -->
+<?php
 
-	<label><h1>TITRE REUNION</h1></label><br>
-	<label>Description</label><br>
-	<label>heure debut</label> jusqu'a <label>Heure fin</label><br>
-	<label>invité (a traiter en JS voir avec victor)</label><br>
-	<input type="submit" value="Modifier"><input type="submit" value="Supprimer"> <!-- controle supprimer  a faire en JS -->
-	      
+if($reservations[0]!= null)
+{
+  foreach ($reservations as $key) {
+?>
+	<label><h1><?php echo $key->get_description();?></h1></label><br>
+	<label><?php echo $key->get_description();?></label><br>
+	<label><?php echo date('d-m-Y H',strtotime($key->get_debut_reservation()));?> H</label> jusqu'a <label><?php echo date('d-m-Y H',strtotime($key->get_fin_reservation()));?> H</label><br>
+  <?php
+    $invites = $reservationMetier->get_reservations_invites($key->get_id_salle(), $key->get_debut_reservation(), $key->get_fin_reservation());
+    if($invites[0]!= null)
+    {
+      echo "Paricipant(s) : <BR>"; 
+      foreach ($invites as $invite) 
+      {
+  ?>
+	<label><?php echo $utilisateurMetier->get_utilisateur_by_id(1)->get_nom_utilisateur()." ".$utilisateurMetier->get_utilisateur_by_id(1)->get_prenom_utilisateur(); ?></label><br>
+	 <?php 
+      }
+   ?>
+  <input type="submit" value="Modifier"><input type="submit" value="Supprimer"> <!-- controle supprimer  a faire en JS -->
+<?php
+    }
+    else
+      echo "Aucun Participant. <BR>";
+  }
+}
+else{
+  echo "Aucune réunion à venir. <BR>";
+}
+?>	      
 
 
     </div>

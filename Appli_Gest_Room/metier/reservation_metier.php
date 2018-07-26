@@ -96,6 +96,51 @@ class reservation_metier
 		return $tab_res ;
 	}
 
+	
+	//Récupération des réservations de la semaine d'un utilisateur
+	public function get_reservations_intervalle_by_id_utilisateur($id, $date_debut, $date_fin)
+	{
+		$resData = new reservationData() ;
+		$i = 0;
+		$tab_res[0] = null; 
+		foreach ($resData->get_reservations_intervalle($id, $date_debut, $date_fin) as $uneRes) 
+		{
+			$tab_res[$i] = new reservation(
+				$uneRes["id_utilisateur"],
+				$uneRes["id_salle"],
+				$uneRes["debut_reservation"],
+				$uneRes["fin_reservation"],
+				$uneRes["est_facultatif"],
+				$uneRes["description"],
+				$uneRes["est_invite"]
+			) ;
+			$i++;
+		}
+		return $tab_res ;
+	}
+
+	public function get_reservations_invites($id_salle, $debut, $fin)
+	{
+		$resData = new reservationData() ;
+		$i = 0;
+		$tab_res[0] = null; 
+		foreach ($resData->get_reservations_invites($id_salle, $debut, $fin) as $uneRes) 
+		{
+			$tab_res[$i] = new reservation(
+				$uneRes["id_utilisateur"],
+				$uneRes["id_salle"],
+				$uneRes["debut_reservation"],
+				$uneRes["fin_reservation"],
+				$uneRes["est_facultatif"],
+				$uneRes["description"],
+				$uneRes["est_invite"]
+			) ;
+			$i++;
+		}
+		return $tab_res ;
+	}
+
+
 	// Création d'une reservation
 	public function create_reservation($id_user , $id_salle , $debut , $fin , $est_facultatif , $description)
 	{
