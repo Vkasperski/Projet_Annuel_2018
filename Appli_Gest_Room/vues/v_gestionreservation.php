@@ -94,7 +94,7 @@ if($reservations[0]!= null)
 {
   foreach ($reservations as $key) {
 ?>
-	<label><h1><?php echo $key->get_description();?></h1></label><br>
+	<label><h1><?php echo $key->get_titre();?></h1></label><br>
 	<label><?php echo $key->get_description();?></label><br>
 	<label><?php echo date('d-m-Y H',strtotime($key->get_debut_reservation()));?> H</label> jusqu'a <label><?php echo date('d-m-Y H',strtotime($key->get_fin_reservation()));?> H</label><br>
   <?php

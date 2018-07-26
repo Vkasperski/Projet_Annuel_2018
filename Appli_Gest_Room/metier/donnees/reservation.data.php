@@ -16,6 +16,7 @@ class reservationData
 			(
 				"id_utilisateur" => $datas["id_utilisateur"],
 				"id_salle" => $datas["id_salle"],
+				"titre_reservation" => $datas["titre_reservation"],
 				"debut_reservation" => $datas["debut_reservation"],
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],
@@ -39,6 +40,7 @@ class reservationData
 			(
 				"id_utilisateur" => $datas["id_utilisateur"],
 				"id_salle" => $datas["id_salle"],
+				"titre_reservation" => $datas["titre_reservation"],
 				"debut_reservation" => $datas["debut_reservation"],
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],
@@ -63,6 +65,7 @@ class reservationData
 			(
 				"id_utilisateur" => $datas["id_utilisateur"],
 				"id_salle" => $datas["id_salle"],
+				"titre_reservation" => $datas["titre_reservation"],
 				"debut_reservation" => $datas["debut_reservation"],
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],
@@ -86,6 +89,7 @@ class reservationData
 			(
 				"id_utilisateur" => $datas["id_utilisateur"],
 				"id_salle" => $datas["id_salle"],
+				"titre_reservation" => $datas["titre_reservation"],
 				"debut_reservation" => $datas["debut_reservation"],
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],
@@ -110,6 +114,7 @@ class reservationData
 			(
 				"id_utilisateur" => $datas["id_utilisateur"],
 				"id_salle" => $datas["id_salle"],
+				"titre_reservation" => $datas["titre_reservation"],
 				"debut_reservation" => $datas["debut_reservation"],
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],
@@ -133,6 +138,7 @@ class reservationData
 			(
 				"id_utilisateur" => $datas["id_utilisateur"],
 				"id_salle" => $datas["id_salle"],
+				"titre_reservation" => $datas["titre_reservation"],
 				"debut_reservation" => $datas["debut_reservation"],
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],
@@ -166,6 +172,7 @@ class reservationData
 			(
 				"id_utilisateur" => $datas["id_utilisateur"],
 				"id_salle" => $datas["id_salle"],
+				"titre_reservation" => $datas["titre_reservation"],
 				"debut_reservation" => $datas["debut_reservation"],
 				"fin_reservation" => $datas["fin_reservation"],
 				"est_facultatif" => $datas["est_facultatif"],

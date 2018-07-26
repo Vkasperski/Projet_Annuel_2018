@@ -19,6 +19,7 @@ class reservation_metier
 			$tab_res[$i] = new reservation(
 				$uneRes["id_utilisateur"],
 				$uneRes["id_salle"],
+				$uneRes["titre_reservation"],
 				$uneRes["debut_reservation"],
 				$uneRes["fin_reservation"],
 				$uneRes["est_facultatif"],
@@ -41,6 +42,7 @@ class reservation_metier
 			$tab_res[$i] = new reservation(
 				$uneRes["id_utilisateur"],
 				$uneRes["id_salle"],
+				$uneRes["titre_reservation"],
 				$uneRes["debut_reservation"],
 				$uneRes["fin_reservation"],
 				$uneRes["est_facultatif"],
@@ -63,6 +65,7 @@ class reservation_metier
 			$tab_res[$i] = new reservation(
 				$uneRes["id_utilisateur"],
 				$uneRes["id_salle"],
+				$uneRes["titre_reservation"],
 				$uneRes["debut_reservation"],
 				$uneRes["fin_reservation"],
 				$uneRes["est_facultatif"],
@@ -85,6 +88,7 @@ class reservation_metier
 			$tab_res[$i] = new reservation(
 				$uneRes["id_utilisateur"],
 				$uneRes["id_salle"],
+				$uneRes["titre_reservation"],
 				$uneRes["debut_reservation"],
 				$uneRes["fin_reservation"],
 				$uneRes["est_facultatif"],
@@ -108,6 +112,7 @@ class reservation_metier
 			$tab_res[$i] = new reservation(
 				$uneRes["id_utilisateur"],
 				$uneRes["id_salle"],
+				$uneRes["titre_reservation"],
 				$uneRes["debut_reservation"],
 				$uneRes["fin_reservation"],
 				$uneRes["est_facultatif"],
@@ -129,6 +134,7 @@ class reservation_metier
 			$tab_res[$i] = new reservation(
 				$uneRes["id_utilisateur"],
 				$uneRes["id_salle"],
+				$uneRes["titre_reservation"],
 				$uneRes["debut_reservation"],
 				$uneRes["fin_reservation"],
 				$uneRes["est_facultatif"],
@@ -165,6 +171,7 @@ class reservation_metier
 				$tab_res[$i] = new reservation(
 					$uneRes["id_utilisateur"],	
 					$uneRes["id_salle"],
+					$uneRes["titre_reservation"],
 					$uneRes["debut_reservation"],
 					$uneRes["fin_reservation"],
 					$uneRes["est_facultatif"],
@@ -192,9 +199,6 @@ class reservation_metier
 	}
 }
 
-
-$resM = new reservation_metier();
-echo($resM->verif_possibilite_reservation(1,1,"2018-04-01 10:00:00","2018-04-01 11:00:00"));
 
 //for($i = 1; $i<=9;$i++)
 //{
