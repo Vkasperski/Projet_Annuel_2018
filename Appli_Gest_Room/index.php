@@ -16,7 +16,7 @@ switch($uc){
 	}
 	case 'home' :{
 		include("controleurs/c_home.php");
-                break;
+        break;
 	}
 	case 'salles' :{
 		include("controleurs/c_salles.php");

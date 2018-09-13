@@ -15,7 +15,7 @@ class salle_metier
 				$uneSalle["id_salle"],
 				$uneSalle["nom_salle"],
 				$uneSalle["disponibilite_salle"],
-				$uneSalle["descriptif_salle"]
+				$uneSalle["description_salle"]
 			);
 			$i++;
 		}

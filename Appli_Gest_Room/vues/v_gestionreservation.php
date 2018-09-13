@@ -1,15 +1,15 @@
 <?php
-include("../metier/reservation_metier.php");
-include("../metier/header.php");
-include("../metier/utilisateur_metier.php");
+include("metier/reservation_metier.php");
+include("metier/utilisateur_metier.php");
 
 $reservationMetier = new reservation_metier();
 
 $utilisateurMetier = new utilisateur_metier();
 
-//$reservations = $reservationMetier->get_reservations_by_id_utilisateur($_SESSION["id"]);
 $reservations = $reservationMetier->get_reservations_by_id_utilisateur(1);
+
 ?>
+<meta charset="utf-8">
  <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
@@ -96,7 +96,7 @@ if($reservations[0]!= null)
 ?>
 	<label><h1><?php echo $key->get_titre();?></h1></label><br>
 	<label><?php echo $key->get_description();?></label><br>
-	<label><?php echo date('d-m-Y H',strtotime($key->get_debut_reservation()));?> H</label> jusqu'a <label><?php echo date('d-m-Y H',strtotime($key->get_fin_reservation()));?> H</label><br>
+	<label><?php echo date('d-m-Y H',strtotime($key->get_debut_reservation()));?>h</label> jusqu'a <label><?php echo date('d-m-Y H',strtotime($key->get_fin_reservation()));?>h</label><br>
   <?php
     $invites = $reservationMetier->get_reservations_invites($key->get_id_salle(), $key->get_debut_reservation(), $key->get_fin_reservation());
     if($invites[0]!= null)
@@ -105,15 +105,16 @@ if($reservations[0]!= null)
       foreach ($invites as $invite) 
       {
   ?>
-	<label><?php echo $utilisateurMetier->get_utilisateur_by_id(1)->get_nom_utilisateur()." ".$utilisateurMetier->get_utilisateur_by_id(1)->get_prenom_utilisateur(); ?></label><br>
+	<label><?php echo $utilisateurMetier->get_utilisateur_by_id($invite->get_id_utilisateur())->get_nom_utilisateur()." ".$utilisateurMetier->get_utilisateur_by_id($invite->get_id_utilisateur())->get_prenom_utilisateur(); ?></label><br>
 	 <?php 
       }
-   ?>
-  <input type="submit" value="Modifier"><input type="submit" value="Supprimer"> <!-- controle supprimer  a faire en JS -->
-<?php
     }
     else
       echo "Aucun Participant. <BR>";
+   ?>
+  <input type="submit" value="Modifier"><input type="submit" value="Supprimer"></br></br></br> <!-- controle supprimer  a faire en JS -->
+<?php
+    
   }
 }
 else{

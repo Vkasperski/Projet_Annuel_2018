@@ -16,7 +16,7 @@ class salleData
 				"id_salle" => $datas["id_salle"],
 				"nom_salle" => $datas["nom_salle"],
 				"disponibilite_salle" => $datas["disponibilite_salle"],
-				"descriptif_salle" => $datas["descriptif_salle"]
+				"description_salle" => $datas["description_salle"]
 			);
 			$i++;
 		}

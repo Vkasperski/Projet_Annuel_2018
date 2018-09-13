@@ -1,3 +1,9 @@
+<?php
+include("metier/header.php");
+include("metier/salle_metier.php");
+  
+?>
+<meta charset="utf-8">
  <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->

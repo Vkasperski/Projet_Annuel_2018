@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
@@ -6,38 +7,42 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="index.php?uc=home&action=accueil">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Accueil</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
+          <a class="nav-link" href="index.php?uc=salles&action=salles">
             <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Planning</span>
+            <span class="nav-link-text">Salles</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
+          <a class="nav-link" href="index.php?uc=reservations&action=reservations">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Employé</span>
+            <span class="nav-link-text">Mes réservations</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="index.php?uc=moncompte&action=collaborateur">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Collaborateur</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+          <a class="nav-link" href="index.php?uc=salles&action=gestion_salles">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Gestion de salles</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+          <a class="nav-link" href="index.php?uc=moncompte&action=moncompte">
             <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">Mon compte</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="navbar.html">Navbar</a>
-            </li>
-            <li>
-              <a href="cards.html">Cards</a>
-            </li>
-          </ul>
         </li>
         <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
@@ -91,9 +96,15 @@
           </ul>
         </li>-->
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="index.php?uc=moncompte&action=support_technique">
             <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">Link</span>
+            <span class="nav-link-text">Suport technique</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+          <a class="nav-link" href="index.php?uc=moncompte&action=fonctionnement">
+            <i class="fa fa-fw fa-link"></i>
+            <span class="nav-link-text">Fonctionnement</span>
           </a>
         </li>
       </ul>

@@ -2,7 +2,7 @@
 session_start();
 include("metier/header.php");
 if (isset($_SESSION["mail"])) {
-  header('Location: v_home.php');
+  header('Location: index.php?uc=home&action=accueil');
 }
 
 include("metier/utilisateur_metier.php");
@@ -28,7 +28,7 @@ if(isset($_POST["conect"]))
         //On remet le compteur du bloquage de compte à 0
         $userMetier->update_user($_SESSION["id"],$_SESSION["nom"],$_SESSION["prenom"],$_SESSION["mail"],$_SESSION["psw"],$_SESSION["admin"],$_SESSION["pdg"],0);
 
-        header('Location: vues/v_home.php');
+        header('Location: index.php?uc=home&action=accueil');
       }else{
         $_SESSION["bloque"] = $_SESSION["bloque"]+1;
         $userMetier->update_user(
@@ -64,9 +64,9 @@ if(isset($_POST["conect"]))
 
 
 
-
+<meta charset="utf-8">
 <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button></br>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Connexion</button></br>
 <div style="color : red;"><b>
 <?php
   echo $error;
